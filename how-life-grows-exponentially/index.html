@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>exponential-growth</title>
+	<canvas id="canvas" style="border:1px solid #000000;"></canvas>
+	<script src="../../rts-game/javascript/Vectors.js"></script>
+	<script src="../../rts-game/javascript/Pathfinding.js"></script>
+	<script src="../../rts-game/javascript/Geometry.js"></script>
+	<script src="../../rts-game/javascript/Collision.js"></script>
+</head>
+<body>
+
+
+<!-- Builds the map -->
+<script src="canvas.js"></script>
+
+<!-- Draws the creatures -->
+<script src="creatures.js"></script>
+
+<!-- Gives the state of the evolution -->
+<script src="state.js"></script>
+
+<script>
+
+let startTime = new Date().getTime();
+let last      = 0;
+
+function run() {
+  let now = new Date().getTime() - startTime;
+
+  // Increase the epoch every 1.5 seconds
+  if ( now - last > 1500) {
+	last = now;
+	State.nextEpoch();
+  }
+
+  wipeScreen();
+  c1.x += 1
+  c1.draw()
+  State.drawEpoch();
+
+  State.creatures.forEach(creature => {
+	  creature.draw();
+	  creature.move();
+  });
+
+  requestAnimationFrame(run);
+}
+
+run();
+</script>
