@@ -21,8 +21,8 @@ class Creature {
     }
 
     die() {
-        let index = State.creatures.indexOf(this);
-        State.creatures.splice(index, 1);
+        let index = State.creatures.blue.indexOf(this);
+        State.creatures.blue.splice(index, 1);
     }
 
     draw() {

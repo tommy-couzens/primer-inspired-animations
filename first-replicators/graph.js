@@ -19,18 +19,27 @@ graph.draw = function() {
     ctx.fillText("Time", canvas.width - 100, canvas.height - 100);
 }
 
-graph.previousX = map.width + 100;
-graph.previousY = canvas.height - 100;
+graph.previousBlueX = map.width + 100;
+graph.previousBlueY = canvas.height - 100;
 
-graph.drawLine = function () {
+graph.previousGreenX = map.width + 100;
+graph.previousGreenY = canvas.height - 100;
+
+graph.drawLine = function (creatureArray, colour) {
     increment = 8;
 
     newX = map.width + 100 + State.epoch*increment,
-    newY = canvas.height - 100 - State.creatures.length*increment
+    newY = canvas.height - 100 - creatureArray.length*increment
 
-    line(graph.previousX, graph.previousY, newX, newY);
-    graph.previousX = newX
-    graph.previousY = newY
+    if (colour == "blue") {
+        line(graph.previousBlueX, graph.previousBlueY, newX, newY, "blue");
+        graph.previousBlueX = newX
+        graph.previousBlueY = newY
+    } else if ( colour == "green") {
+        line(graph.previousGreenX, graph.previousGreenY, newX, newY, "green");
+        graph.previousGreenX = newX
+        graph.previousGreenY = newY
+    }
 }
 
 
