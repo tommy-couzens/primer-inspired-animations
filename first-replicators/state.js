@@ -9,6 +9,7 @@ State.drawEpoch = function() {
     ctx.fillStyle = "black";
     ctx.fillText("Epoch: " + State.epoch, map.width - 250, 50);
     ctx.fillText("Creatures: " + State.creatures.length, map.width - 250, 100);
+    graph.drawLine();
 }
 
 State.nextEpoch = function () {

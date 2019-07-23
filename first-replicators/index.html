@@ -28,6 +28,9 @@
 let startTime = new Date().getTime();
 let last      = 0;
 
+// The graph only needs to be drawn once since it is static
+graph.draw();
+
 function run() {
   let now = new Date().getTime() - startTime;
 
@@ -45,7 +48,6 @@ function run() {
   });
   State.drawEpoch();
   drawDividerLine();
-  graph.draw();
 
   requestAnimationFrame(run);
 }

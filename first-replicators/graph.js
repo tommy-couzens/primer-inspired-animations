@@ -19,4 +19,18 @@ graph.draw = function() {
     ctx.fillText("Time", canvas.width - 100, canvas.height - 100);
 }
 
+graph.previousX = map.width + 100;
+graph.previousY = canvas.height - 100;
+
+graph.drawLine = function () {
+    increment = 8;
+
+    newX = map.width + 100 + State.epoch*increment,
+    newY = canvas.height - 100 - State.creatures.length*increment
+
+    line(graph.previousX, graph.previousY, newX, newY);
+    graph.previousX = newX
+    graph.previousY = newY
+}
+
 
