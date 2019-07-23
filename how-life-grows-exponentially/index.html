@@ -35,13 +35,11 @@ function run() {
   }
 
   wipeScreen();
-  c1.x += 1
-  c1.draw()
   State.drawEpoch();
 
   State.creatures.forEach(creature => {
 	  creature.draw();
-	  creature.move();
+    creature.move();
   });
 
   requestAnimationFrame(run);
