@@ -14,21 +14,34 @@ State.nextEpoch = function () {
     this.epoch += 1;
     let x = 25 + Math.random()*(canvas.width - 50);
     let y = 25 + Math.random()*(canvas.height - 50);
-    // this.newCreature(x, y);
+    this.newBlueCreature(x, y);
     this.replicateCreatures();
-    // this.killCreatures();
+    this.mutateCreatures();
+    this.killCreatures();
 }
 
-State.newCreature = function (x, y, vx, vy, size ) {
+State.newBlueCreature = function (x, y, vx, vy, size ) {
     State.creatures.push(new blueCreature(x, y, vx, vy, size));
 }
 
-State.newCreature(100,100);
+State.newGreenCreature = function (x, y, vx, vy, size ) {
+    State.creatures.push(new greenCreature(x, y, vx, vy, size));
+}
+
+State.newBlueCreature(100,100);
 
 State.replicateCreatures = function() {
     State.creatures.forEach(creature => {
         if (Math.random() < creature.replicationRate) {
             creature.replicate();
+        }
+    });
+}
+
+State.mutateCreatures = function() {
+    State.creatures.forEach(creature => {
+        if (Math.random() < creature.mutationRate){
+            creature.mutate();
         }
     });
 }

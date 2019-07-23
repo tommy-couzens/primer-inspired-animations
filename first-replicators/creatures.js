@@ -20,8 +20,9 @@ class Creature {
         this.y += this.vy;
     }
 
-    replicate() {
-        State.newCreature(this.x, this.y, -this.vx, -this.vy, this.size);
+    die() {
+        let index = State.creatures.indexOf(this);
+        State.creatures.splice(index, 1);
     }
 
     draw() {
@@ -34,8 +35,15 @@ class blueCreature extends Creature {
         super(x, y, vx, vy, size)
         this.colour = "blue"
         this.deathRate = 0.10;
-        this.replicationRate = 1;
+        this.replicationRate = 0.05;
         this.mutationRate = 0.10;
+    }
+    replicate() {
+        State.newBlueCreature(this.x, this.y, -this.vx, -this.vy, this.size);
+    }
+    mutate() {
+        State.newGreenCreature(this.x, this.y, this.vx, this.vy, this.size);
+        this.die();
     }
 }
 
@@ -45,5 +53,11 @@ class greenCreature extends Creature {
         this.colour = "green"
         this.deathRate = 0.10;
         this.replicationRate = 0.05;
+        this.mutationRate = 0;
+    }
+    replicate() {
+        State.newGreenCreature(this.x, this.y, -this.vx, -this.vy, this.size);
+    }
+    mutate() {
     }
 }
