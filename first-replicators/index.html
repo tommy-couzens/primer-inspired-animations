@@ -20,6 +20,9 @@
 <!-- Gives the state of the evolution -->
 <script src="state.js"></script>
 
+<!-- Makes the graph on the right! -->
+<script src="graph.js"></script>
+
 <script>
 
 let startTime = new Date().getTime();
@@ -28,19 +31,21 @@ let last      = 0;
 function run() {
   let now = new Date().getTime() - startTime;
 
-  // Increase the epoch every 1.5 seconds
-  if ( now - last > 1500) {
+  // Increase the epoch every 300ms
+  if ( now - last > 300) {
 	last = now;
 	State.nextEpoch();
   }
 
   wipeScreen();
-  State.drawEpoch();
-
+  
   State.creatures.forEach(creature => {
 	  creature.draw();
     creature.move();
   });
+  State.drawEpoch();
+  drawDividerLine();
+  graph.draw();
 
   requestAnimationFrame(run);
 }
