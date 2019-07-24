@@ -8,10 +8,10 @@ class Creature {
     }
     move() {
         // change direction at boundaries
-        if (this.x + this.size > canvas.width || this.x - this.size < 0) {
+        if (this.x + this.size > map.width || this.x - this.size < 0) {
             this.vx *= -1
         }
-        if (this.y + this.size > canvas.height || this.y - this.size < 0) {
+        if (this.y + this.size > map.height || this.y - this.size < 0) {
             this.vy *= -1
         }
 
@@ -21,8 +21,8 @@ class Creature {
     }
 
     die() {
-        let index = State.creatures.indexOf(this);
-        State.creatures.splice(index, 1);
+        let index = State.creatures.blue.indexOf(this);
+        State.creatures.blue.splice(index, 1);
     }
 
     draw() {
@@ -37,12 +37,17 @@ class blueCreature extends Creature {
         this.deathRate = 0.10;
         this.replicationRate = 0.05;
         this.mutationRate = 0.10;
+        this.redMutationRate = 0.10;
     }
     replicate() {
         State.newBlueCreature(this.x, this.y, -this.vx, -this.vy, this.size);
     }
     mutate() {
         State.newGreenCreature(this.x, this.y, this.vx, this.vy, this.size);
+        this.die();
+    }
+    mutateRed() {
+        State.newRedCreature(this.x, this.y, this.vx, this.vy, this.size);
         this.die();
     }
 }
@@ -54,9 +59,26 @@ class greenCreature extends Creature {
         this.deathRate = 0.10;
         this.replicationRate = 0.05;
         this.mutationRate = 0;
+        this.redMutationRate = 0;
     }
     replicate() {
         State.newGreenCreature(this.x, this.y, -this.vx, -this.vy, this.size);
+    }
+    mutate() {
+    }
+}
+
+class RedCreature extends Creature {
+    constructor(x, y, size = 25) {
+        super(x, y, size)
+        this.colour = "red"
+        this.deathRate = 0.05;
+        this.replicationRate = 0.05;
+        this.mutationRate = 0;
+        this.redMutationRate = 0;
+    }
+    replicate() {
+        State.newRedCreature(this.x, this.y, -this.vx, -this.vy, this.size);
     }
     mutate() {
     }

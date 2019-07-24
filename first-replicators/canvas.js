@@ -6,10 +6,18 @@ var ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth - 50
 canvas.height = window.innerHeight -50
 
-// Give the canvas a border and make it nice and blue
+// Give the canvas a border
+canvas.style.border = "10px solid";
+
+map = {}
+map.width = canvas.width/2 -50;
+map.height = canvas.height;
 
 function wipeScreen() {
-    canvas.style.border = "10px solid";
     ctx.fillStyle = "lightblue";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, map.width, map.height);
+}
+
+function drawDividerLine() {
+    line(map.width, 0, map.width, map.height, "black", 10);
 }
