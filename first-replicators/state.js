@@ -26,6 +26,7 @@ State.nextEpoch = function () {
 
     graph.drawLine(State.creatures.blue, "blue");
     graph.drawLine(State.creatures.green, "green");
+    graph.drawLine(State.creatures.green, "red");
 }
 
 State.newBlueCreature = function (x, y, vx, vy, size ) {
