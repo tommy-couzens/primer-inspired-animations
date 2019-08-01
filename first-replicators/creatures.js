@@ -23,12 +23,15 @@ class Creature {
         this.x += this.vx;
         this.y += this.vy;
     }
-
-    die() {
-        let index = State.creatures.blue.indexOf(this);
-        State.creatures.blue.splice(index, 1);
+    mutate() {
+        State.newGreenCreature(this.x, this.y, this.vx, this.vy, this.size);
     }
-
+    mutateRed() {
+        State.newRedCreature(this.x, this.y, this.vx, this.vy, this.size);
+    }
+    mutateOrange() {
+        State.newOrangeCreature(this.x, this.y, this.vx, this.vy, this.size);
+    }
     draw() {
         circle(this.x, this.y, this.size, this.colour);
     }
@@ -47,12 +50,7 @@ class blueCreature extends Creature {
     replicate() {
         State.newBlueCreature(this.x, this.y, -this.vx, -this.vy, this.size);
     }
-    mutate() {
-        State.newGreenCreature(this.x, this.y, this.vx, this.vy, this.size);
-    }
-    mutateRed() {
-        State.newRedCreature(this.x, this.y, this.vx, this.vy, this.size);
-    }
+
 }
 
 class greenCreature extends Creature {
@@ -80,11 +78,6 @@ class RedCreature extends Creature {
     replicate() {
         State.newRedCreature(this.x, this.y, -this.vx, -this.vy, this.size);
     }
-    mutateOrange() {
-        State.newOrangeCreature(this.x, this.y, this.vx, this.vy, this.size);
-    }
-    mutate() {
-    }
 }
 
 class orangeCreature extends Creature {
@@ -96,7 +89,5 @@ class orangeCreature extends Creature {
     }
     replicate() {
         State.newOrangeCreature(this.x, this.y, -this.vx, -this.vy, this.size);
-    }
-    mutate() {
     }
 }
