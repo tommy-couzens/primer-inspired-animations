@@ -33,12 +33,16 @@ State.nextEpoch = function () {
     this.newBlueCreature(x, y);
     // this.replicateCreatures();
     this.mutateCreatures();
-    // this.killCreatures();
+    this.killCreatures();
 
     for (const colour of Object.keys(State.runningTotals)) {
         State.runningTotals[colour].push(State.creatures[colour].length)
     }
 }
+
+// newCreature = function (colour) {
+//     State.creature[colour].push
+// }
 
 State.newBlueCreature = function (x, y, vx, vy, size ) {
     State.creatures["blue"].push(new blueCreature(x, y, vx, vy, size));
@@ -54,14 +58,13 @@ State.newRedCreature = function (x, y, vx, vy, size ) {
 State.newBlueCreature(100,100);
 
 State.replicateCreatures = function() {
-    for (const [key, value] of Object.entries(State.creatures)) {
-        value.forEach(creature => {
+    for (const array of Object.values(State.creatures)) {
+        array.forEach(creature => {
             if (Math.random() < creature.replicationRate) {
                 creature.replicate();
             }
         })
     }
-
 }
 
 State.mutateCreatures = function() {
@@ -75,10 +78,12 @@ State.mutateCreatures = function() {
 }
 
 State.killCreatures = function() {
-    for (let i = 0; i < this.creatures.length; i++) {
-        creature = this.creatures[i];
-        if (Math.random() < creature.deathRate) {
-            this.creatures.splice(i,1);
+    for (const array of Object.values(State.creatures)) {
+        for (let i = 0; i < array.length; i ++) {
+            creature = array[i]
+            if (Math.random() < creature.deathRate) {
+                array.splice(i, 1);
+            }
         }
     }
 }
