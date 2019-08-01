@@ -24,20 +24,21 @@ class Creature {
         this.y += this.vy;
     }
     mutate() {
-        State.newGreenCreature(this.x, this.y, this.vx, this.vy, this.size);
+        State.creatures["green"].push(new GreenCreature(this.x, this.y, -this.vx, -this.vy, this.size));
     }
     mutateRed() {
-        State.newRedCreature(this.x, this.y, this.vx, this.vy, this.size);
+        State.creatures["red"].push(new RedCreature(this.x, this.y, -this.vx, -this.vy, this.size));
     }
     mutateOrange() {
-        State.newOrangeCreature(this.x, this.y, this.vx, this.vy, this.size);
+        State.creatures["orange"].push(new OrangeCreature(this.x, this.y, -this.vx, -this.vy, this.size));
     }
+
     draw() {
         circle(this.x, this.y, this.size, this.colour);
     }
 }
 
-class blueCreature extends Creature {
+class BlueCreature extends Creature {
     constructor(x, y, vx, vy, size = 25) {
         super(x, y, vx, vy, size)
         this.colour = "blue"
@@ -48,12 +49,12 @@ class blueCreature extends Creature {
 
     }
     replicate() {
-        State.newBlueCreature(this.x, this.y, -this.vx, -this.vy, this.size);
+        State.creatures[this.colour].push(new BlueCreature(this.x, this.y, -this.vx, -this.vy, this.size));
     }
 
 }
 
-class greenCreature extends Creature {
+class GreenCreature extends Creature {
     constructor(x, y, size = 25) {
         super(x, y, size)
         this.colour = "green"
@@ -61,7 +62,7 @@ class greenCreature extends Creature {
         this.replicationRate = 0.05;
     }
     replicate() {
-        State.newGreenCreature(this.x, this.y, -this.vx, -this.vy, this.size);
+        State.creatures[this.colour].push(new GreenCreature(this.x, this.y, -this.vx, -this.vy, this.size));
     }
     mutate() {
     }
@@ -76,11 +77,11 @@ class RedCreature extends Creature {
         this.orangeMutationRate = 0.05;
     }
     replicate() {
-        State.newRedCreature(this.x, this.y, -this.vx, -this.vy, this.size);
+        State.creatures[this.colour].push(new RedCreature(this.x, this.y, -this.vx, -this.vy, this.size));
     }
 }
 
-class orangeCreature extends Creature {
+class OrangeCreature extends Creature {
     constructor(x, y, size = 25) {
         super(x, y, size)
         this.colour = "orange"
@@ -88,6 +89,6 @@ class orangeCreature extends Creature {
         this.replicationRate = 0.10;
     }
     replicate() {
-        State.newOrangeCreature(this.x, this.y, -this.vx, -this.vy, this.size);
+        State.creatures[this.colour].push(new OrangeCreature(this.x, this.y, -this.vx, -this.vy, this.size));
     }
 }
