@@ -31,11 +31,11 @@ State.nextEpoch = function () {
     let y = 25 + Math.random()*(map.height - 50);
     
     this.newBlueCreature(x, y);
-    // this.replicateCreatures();
-    this.mutateCreatures();
+    this.replicateCreatures();
+    // this.mutateCreatures();
     this.killCreatures();
 
-    for (const colour of Object.keys(State.runningTotals)) {
+    for (const colour of Object.keys(State.creatures)) {
         State.runningTotals[colour].push(State.creatures[colour].length)
     }
 }
@@ -61,7 +61,11 @@ State.replicateCreatures = function() {
     for (const array of Object.values(State.creatures)) {
         array.forEach(creature => {
             if (Math.random() < creature.replicationRate) {
-                creature.replicate();
+                if (Math.random() < creature.mutationRate) {
+                    creature.mutate();
+                } else {
+                    creature.replicate();
+                }
             }
         })
     }
