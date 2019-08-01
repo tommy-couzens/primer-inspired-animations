@@ -33,21 +33,11 @@ State.nextEpoch = function () {
     this.newBlueCreature(x, y);
     // this.replicateCreatures();
     this.mutateCreatures();
-    this.killCreatures();
+    // this.killCreatures();
 
-    State.runningTotals["blue"].push(State.creatures["blue"].length)
-    State.runningTotals["green"].push(State.creatures["green"].length)
-    State.runningTotals["red"].push(State.creatures["red"].length)
-
-    // for (const [key, value] of Object.entries(State.runningTotals)) {
-    //     State.runningTotals[key].push(State.creatures[key].length)
-    // }
-    // console.log(State.runningTotals['blue'])
-
-
-    // graph.drawLine(State.creatures["blue"], "blue");
-    // graph.drawLine(State.creatures["green"], "green");
-    // graph.drawLine(State.creatures["red"], "red");
+    for (const colour of Object.keys(State.runningTotals)) {
+        State.runningTotals[colour].push(State.creatures[colour].length)
+    }
 }
 
 State.newBlueCreature = function (x, y, vx, vy, size ) {
