@@ -3,13 +3,15 @@ let State = {}
 State.creatures = {
     blue: [],
     green: [],
-    red: []
+    red: [],
+    orange: []
 }
 
 State.runningTotals = {
     blue: [0],
     green: [0],
-    red: [0]
+    red: [0],
+    orange: [0]
 }
 
 State.epoch = 0
@@ -31,11 +33,10 @@ State.nextEpoch = function () {
     let y = 25 + Math.random()*(map.height - 50);
     
     this.newBlueCreature(x, y);
-    // this.replicateCreatures();
-    this.mutateCreatures();
+    this.replicateCreatures();
     this.killCreatures();
 
-    for (const colour of Object.keys(State.runningTotals)) {
+    for (const colour of Object.keys(State.creatures)) {
         State.runningTotals[colour].push(State.creatures[colour].length)
     }
 }
@@ -54,14 +55,25 @@ State.newGreenCreature = function (x, y, vx, vy, size ) {
 State.newRedCreature = function (x, y, vx, vy, size ) {
     State.creatures["red"].push(new RedCreature(x, y, vx, vy, size));
 }
-
-State.newBlueCreature(100,100);
+State.newOrangeCreature = function (x, y, vx, vy, size ) {
+    State.creatures["orange"].push(new orangeCreature(x, y, vx, vy, size));
+}
 
 State.replicateCreatures = function() {
     for (const array of Object.values(State.creatures)) {
         array.forEach(creature => {
             if (Math.random() < creature.replicationRate) {
-                creature.replicate();
+                const random = Math.random() 
+                console.log(creature.mutationRate, random, creature.mutationRate + creature.redMutationRate)
+                if (random < creature.mutationRate) {
+                    creature.mutate();
+                } else if ( random < creature.mutationRate + creature.redMutationRate ) {
+                    creature.mutateRed();
+                } else if ( random < creature.mutationRate + creature.redMutationRate + creature.orangeMutationRate) {
+                    creature.mutateOrange();
+                } else {
+                    creature.replicate();
+                }
             }
         })
     }
