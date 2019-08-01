@@ -34,7 +34,6 @@ State.nextEpoch = function () {
     
     this.newBlueCreature(x, y);
     this.replicateCreatures();
-    // this.mutateCreatures();
     this.killCreatures();
 
     for (const colour of Object.keys(State.creatures)) {
