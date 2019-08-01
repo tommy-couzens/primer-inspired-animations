@@ -20,7 +20,17 @@ State.drawEpoch = function() {
     ctx.font = "30px Arial";
     ctx.fillStyle = "black";
     ctx.fillText("Epoch: " + State.epoch, map.width - 250, 50);
-    // ctx.fillText("Creatures: " + State.creatures["blue"].length, map.width - 250, 100);
+
+    // Scale the graph when the epoch gets too large
+    if (State.epoch*graph.incrementX >  canvas.width - 100 - graph.zeroX) {
+        graph.incrementX *= 0.95
+        graph.incrementY *= 0.95
+        graph.wipe()
+        graph.draw()
+    }
+    for (const [colour, array] of Object.entries(State.runningTotals)) {
+        graph.drawLine(array, colour, map.width + 100, canvas.height - 100, graph.incrementX, graph.incrementY);
+      }
 }
 
 State.nextEpoch = function () {

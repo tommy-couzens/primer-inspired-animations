@@ -6,7 +6,9 @@ graph.height = window.innerHeight - 50
 graph.zeroX = map.width + 100;
 graph.zeroY = canvas.height - 100;
 
-graph.increment = 8
+graph.incrementX = 2
+graph.incrementY = 4
+
 
 graph.draw = function() {
 
@@ -24,17 +26,21 @@ graph.draw = function() {
     ctx.fillText("Time", canvas.width - 100, graph.zeroY);
 
     // number the axis
-    for (let i = 0; i < (graph.zeroY - 100)/graph.increment; i += 5 ){
-        ctx.fillText(i, graph.zeroX - 20, graph.zeroY - graph.increment*i)
+    for (let i = 0; i < (graph.zeroY - 100)/graph.incrementY; i += 5 ){
+        ctx.fillText(i, graph.zeroX - 20, graph.zeroY - graph.incrementY*i)
     }
 }
 
-graph.drawLine = function(array, colour, startX, startY, increment) {
+graph.wipe = function() {
+    square(graph.zeroX, graph.zeroY, canvas.width - 50, 100, "lightgreen");
+}
+
+graph.drawLine = function(array, colour, startX, startY, incrementX, incrementY) {
     for (i = 0; i < array.length -1; i++) {
-        const x1 = startX + i*2
-        const y1 = startY - array[i]*increment
-        const x2 = startX + (i + 1)*2
-        const y2 = startY - array[i + 1]*increment
+        const x1 = startX + i*incrementX
+        const y1 = startY - array[i]*incrementY
+        const x2 = startX + (i + 1)*incrementX
+        const y2 = startY - array[i + 1]*incrementY
         line(x1, y1, x2, y2, colour);
     }
 }
