@@ -21,14 +21,17 @@ State.drawEpoch = function() {
     ctx.fillStyle = "black";
     ctx.fillText("Epoch: " + State.epoch, map.width - 250, 50);
 
-    // Scale the graph when the epoch gets too large
-    if (State.epoch*graph.incrementX >  canvas.width - 100 - graph.zeroX) {
-        graph.incrementX *= 0.95
-        graph.incrementY *= 0.95
-        graph.wipe()
-        graph.draw()
+    // Scale the graph down when epoch gets too large
+    if (State.epoch*graph.incrementX >  graph.maxX - graph.zeroX) {
+        graph.scaleDown();
     }
+
     for (const [colour, array] of Object.entries(State.runningTotals)) {
+        // Scale the graph down when there is too many creatures
+        const numberOfCreatures = array.slice(-1)[0];
+        if (numberOfCreatures*graph.incrementY > graph.zeroY - graph.maxY) {
+            graph.scaleDown();
+        }
         graph.drawLine(array, colour, map.width + 100, canvas.height - 100, graph.incrementX, graph.incrementY);
       }
 }

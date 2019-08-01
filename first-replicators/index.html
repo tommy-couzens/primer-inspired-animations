@@ -31,7 +31,7 @@ graph.draw();
 function run() {
   let now = new Date().getTime() - startTime;
 
-  // Increase the epoch every 300ms
+  // Increase the epoch every 200ms
   if ( now - last > 200) {
 	last = now;
 	State.nextEpoch();
