@@ -32,7 +32,7 @@ function run() {
   let now = new Date().getTime() - startTime;
 
   // Increase the epoch every 300ms
-  if ( now - last > 600) {
+  if ( now - last > 300) {
 	last = now;
 	State.nextEpoch();
   }

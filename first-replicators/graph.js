@@ -31,9 +31,9 @@ graph.draw = function() {
 
 graph.drawLine = function(array, colour, startX, startY, increment) {
     for (i = 0; i < array.length -1; i++) {
-        const x1 = startX + i*increment
+        const x1 = startX + i*2
         const y1 = startY - array[i]*increment
-        const x2 = startX + (i + 1)*increment
+        const x2 = startX + (i + 1)*2
         const y2 = startY - array[i + 1]*increment
         line(x1, y1, x2, y2, colour);
     }

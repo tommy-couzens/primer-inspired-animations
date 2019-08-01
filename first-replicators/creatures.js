@@ -38,8 +38,8 @@ class blueCreature extends Creature {
         this.replicationRate = 0.05;
         // this.mutationRate = 0.10;
         // this.redMutationRate = 0.10;
-        this.mutationRate = 1.0;
-        this.redMutationRate = 0.0;
+        this.mutationRate = 0.10;
+        this.redMutationRate = 0.10;
 
     }
     replicate() {
@@ -50,7 +50,6 @@ class blueCreature extends Creature {
     }
     mutateRed() {
         State.newRedCreature(this.x, this.y, this.vx, this.vy, this.size);
-        this.die();
     }
 }
 

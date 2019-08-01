@@ -55,14 +55,16 @@ State.newRedCreature = function (x, y, vx, vy, size ) {
     State.creatures["red"].push(new RedCreature(x, y, vx, vy, size));
 }
 
-State.newBlueCreature(100,100);
-
 State.replicateCreatures = function() {
     for (const array of Object.values(State.creatures)) {
         array.forEach(creature => {
             if (Math.random() < creature.replicationRate) {
-                if (Math.random() < creature.mutationRate) {
+                const random = Math.random() 
+                console.log(creature.mutationRate, random, creature.mutationRate + creature.redMutationRate)
+                if (random < creature.mutationRate) {
                     creature.mutate();
+                } else if ( random < creature.mutationRate + creature.redMutationRate ) {
+                    creature.mutateRed();
                 } else {
                     creature.replicate();
                 }
