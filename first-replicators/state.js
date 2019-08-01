@@ -3,13 +3,15 @@ let State = {}
 State.creatures = {
     blue: [],
     green: [],
-    red: []
+    red: [],
+    orange: []
 }
 
 State.runningTotals = {
     blue: [0],
     green: [0],
-    red: [0]
+    red: [0],
+    orange: [0]
 }
 
 State.epoch = 0
@@ -54,6 +56,9 @@ State.newGreenCreature = function (x, y, vx, vy, size ) {
 State.newRedCreature = function (x, y, vx, vy, size ) {
     State.creatures["red"].push(new RedCreature(x, y, vx, vy, size));
 }
+State.newOrangeCreature = function (x, y, vx, vy, size ) {
+    State.creatures["orange"].push(new orangeCreature(x, y, vx, vy, size));
+}
 
 State.replicateCreatures = function() {
     for (const array of Object.values(State.creatures)) {
@@ -65,6 +70,8 @@ State.replicateCreatures = function() {
                     creature.mutate();
                 } else if ( random < creature.mutationRate + creature.redMutationRate ) {
                     creature.mutateRed();
+                } else if ( random < creature.mutationRate + creature.redMutationRate + creature.orangeMutationRate) {
+                    creature.mutateOrange();
                 } else {
                     creature.replicate();
                 }

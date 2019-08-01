@@ -5,6 +5,10 @@ class Creature {
         this.vx = vx;
         this.vy = vy;
         this.size = size;
+
+        this.mutationRate = 0;
+        this.redMutationRate = 0;
+        this.orangeMutationRate = 0;
     }
     move() {
         // change direction at boundaries
@@ -36,8 +40,6 @@ class blueCreature extends Creature {
         this.colour = "blue"
         this.deathRate = 0.10;
         this.replicationRate = 0.05;
-        // this.mutationRate = 0.10;
-        // this.redMutationRate = 0.10;
         this.mutationRate = 0.10;
         this.redMutationRate = 0.10;
 
@@ -59,8 +61,6 @@ class greenCreature extends Creature {
         this.colour = "green"
         this.deathRate = 0.10;
         this.replicationRate = 0.05;
-        this.mutationRate = 0;
-        this.redMutationRate = 0;
     }
     replicate() {
         State.newGreenCreature(this.x, this.y, -this.vx, -this.vy, this.size);
@@ -75,11 +75,27 @@ class RedCreature extends Creature {
         this.colour = "red"
         this.deathRate = 0.05;
         this.replicationRate = 0.05;
-        this.mutationRate = 0;
-        this.redMutationRate = 0;
+        this.orangeMutationRate = 0.05;
     }
     replicate() {
         State.newRedCreature(this.x, this.y, -this.vx, -this.vy, this.size);
+    }
+    mutateOrange() {
+        State.newOrangeCreature(this.x, this.y, this.vx, this.vy, this.size);
+    }
+    mutate() {
+    }
+}
+
+class orangeCreature extends Creature {
+    constructor(x, y, size = 25) {
+        super(x, y, size)
+        this.colour = "orange"
+        this.deathRate = 0.05;
+        this.replicationRate = 0.10;
+    }
+    replicate() {
+        State.newOrangeCreature(this.x, this.y, -this.vx, -this.vy, this.size);
     }
     mutate() {
     }
