@@ -29,33 +29,12 @@ graph.draw = function() {
     }
 }
 
-graph.previousBlueX = graph.zeroX;
-graph.previousBlueY = graph.zeroY;
-
-graph.previousGreenX = graph.zeroX;
-graph.previousGreenY = graph.zeroY;
-
-graph.previousRedX = graph.zeroX;
-graph.previousRedY = graph.zeroY;
-
-graph.drawLine = function (creatureArray, colour) {
-
-    newX = graph.zeroX + State.epoch*graph.increment,
-    newY = graph.zeroY - creatureArray.length*graph.increment
-
-    if (colour == "blue") {
-        line(graph.previousBlueX, graph.previousBlueY, newX, newY, "blue");
-        graph.previousBlueX = newX
-        graph.previousBlueY = newY
-    } else if ( colour == "green") {
-        line(graph.previousGreenX, graph.previousGreenY, newX, newY, "green");
-        graph.previousGreenX = newX
-        graph.previousGreenY = newY
-    } else if (colour == "red") {
-        line(graph.previousRedX, graph.previousRedY, newX, newY, "Red");
-        graph.previousRedX = newX
-        graph.previousRedY = newY
+graph.drawLine = function(array, colour, startX, startY, increment) {
+    for (i = 0; i < array.length -1; i++) {
+        const x1 = startX + i*increment
+        const y1 = startY - array[i]*increment
+        const x2 = startX + (i + 1)*increment
+        const y2 = startY - array[i + 1]*increment
+        line(x1, y1, x2, y2, colour);
     }
 }
-
-
