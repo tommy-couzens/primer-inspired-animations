@@ -39,7 +39,13 @@ function run() {
 
   wipeScreen();
 
-  [State.creatures.blue, State.creatures.green, State.creatures.red].forEach(array => {
+  for (const [colour, array] of Object.entries(State.runningTotals)) {
+    graph.drawLine(array, colour, map.width + 100, canvas.height - 100, 8);
+  }
+
+  graph.drawLine(State.runningTotals["blue"], "blue", map.width + 100, canvas.height - 100, 8);
+
+    [State.creatures['blue'], State.creatures['green'], State.creatures['red']].forEach(array => {
     array.forEach(creature => {
       creature.draw();
       creature.move();
