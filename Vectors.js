@@ -12,8 +12,11 @@ Vector.prototype.add = function(vector) {
 	this.y += vector.y
 	return this
 };
+
 Vector.prototype.minus = function(vector) {
-	return new Vector (this.x - vector.x, this.y - vector.y);
+	this.x -= vector.x
+	this.y -= vector.y
+	return this
 };
 Vector.prototype.mul = function(scalar) {
 	this.x *= scalar
@@ -28,10 +31,24 @@ Vector.prototype.div = function(scalar) {
 Vector.prototype.magnitude = function() {
 	return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
 };
+
 Vector.prototype.norm = function() {
-	var magnitude = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2))
-	return new Vector (this.x/magnitude, this.y/magnitude)
-};
+	const magnitude = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2))
+	this.x /= magnitude
+	this.y /= magnitude
+	return this;
+}
+
+Vector.prototype.setToSpeed = function(scalar){
+	return this.norm().mul(scalar)
+}
+
+
+// Keep as new Vector or you will break things
+Vector.prototype.directionTowards = function (vector) {
+	return new Vector( vector.x - this.x, vector.y - this.y)
+}
+
 Vector.prototype.distanceTo = function(vector) {
 	return Math.sqrt(Math.pow(this.x - vector.x, 2) + Math.pow(this.y - vector.y, 2))
 };

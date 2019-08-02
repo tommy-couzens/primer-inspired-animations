@@ -1,7 +1,7 @@
 class Creature {
-    constructor(position, velocity, speed = 1, size = 1, sense = 1) {
+    constructor(position, velocity, speed = 1, size = 15, sense = 120) {
         this.position = position
-        this.velocity = velocity
+        this.velocity = velocity.setToSpeed(speed)
 
         this.energy = 100;
 
@@ -12,10 +12,10 @@ class Creature {
 
     move() {
         // change direction at boundaries
-        if (this.position.x + this.size*15 > map.width || this.position.x - this.size*15 < 0) {
+        if (this.position.x + this.size > map.width || this.position.x - this.size < 0) {
             this.velocity.x *= -1
         }
-        if (this.position.y + this.size*15 > map.height || this.position.y - this.size*15 < 0) {
+        if (this.position.y + this.size > map.height || this.position.y - this.size < 0) {
             this.velocity.y *= -1
         }
 
@@ -24,11 +24,20 @@ class Creature {
     }
 
     draw() {
-        circle(this.position.x, this.position.y, this.size*15, this.colour);
+        circle(this.position.x, this.position.y, this.size, this.colour);
+    }
+
+    detectFood(foodArray) {
+        foodArray.forEach(food => {
+            if (this.position.distanceTo(food.position) < this.sense) {
+                this.velocity = this.position.directionTowards(food.position)
+                this.velocity.setToSpeed(this.speed)
+            }
+        })
     }
 
     drawSense() {
-        circle(this.position.x, this.position.y, this.size*15 + this.sense*30, this.colour, false);
+        circle(this.position.x, this.position.y, this.sense, this.colour, false);
     }
 }
 
