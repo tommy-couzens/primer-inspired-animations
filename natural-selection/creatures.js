@@ -4,6 +4,7 @@ class Creature {
         this.velocity = velocity.setToSpeed(speed)
 
         this.energy = 100;
+        this.foodEaten = 0;
 
         this.speed = speed;
         this.size = size;
@@ -30,10 +31,21 @@ class Creature {
     detectFood(foodArray) {
         foodArray.forEach(food => {
             if (this.position.distanceTo(food.position) < this.sense) {
-                this.velocity = this.position.directionTowards(food.position)
-                this.velocity.setToSpeed(this.speed)
+                // If it gets to the food, eat it. Else, run towards it
+                if (this.position.distanceTo(food.position) < this.size) {
+                    this.eatFood(food, foodArray)
+                } else {
+                    this.velocity = this.position.directionTowards(food.position)
+                    this.velocity.setToSpeed(this.speed)
+                }
             }
         })
+    }
+
+    eatFood(food, foodArray) {
+        this.foodEaten += 1;
+        let index = foodArray.indexOf(food);
+        foodArray.splice(index, 1);
     }
 
     drawSense() {

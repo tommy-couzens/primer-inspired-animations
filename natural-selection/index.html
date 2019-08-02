@@ -25,8 +25,11 @@ f1 = new Food(new Vector(150, 150));
 f2 = new Food(new Vector(400, 350))
 f3 = new Food(new Vector(200, 180))
 
-// foodArray = [f1, new Food((new Vector(300,100))), f2,];
-foodArray = [f2]
+foodArray = [f1, new Food((new Vector(300,100))), f2,];
+
+for (let i = 0; i < 50; i ++) {
+	foodArray.push(new Food(new Vector(Math.random()*canvas.width, Math.random()*canvas.height)))
+}
 
 function run() {
 	wipeScreen();
