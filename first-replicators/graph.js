@@ -10,7 +10,9 @@ graph.maxX = canvas.width - 100
 graph.maxY = 100
 
 graph.incrementX = 2
-graph.incrementY = 4
+graph.incrementY = 8
+
+graph.maxCreatures = 50
 
 
 graph.draw = function() {
@@ -29,14 +31,15 @@ graph.draw = function() {
     ctx.fillText("Time", graph.maxX, graph.zeroY);
 
     // number the axis
-    for (let i = 0; i < (graph.zeroY - 100)/graph.incrementY; i += 5 ){
-        ctx.fillText(i, graph.zeroX - 20, graph.zeroY - graph.incrementY*i)
+    for (let i = 0; i <= 10; i++ ){
+        ctx.fillText(Math.round(graph.maxCreatures*i/10), graph.zeroX - 25, graph.zeroY + i*(graph.maxY - graph.zeroY)/10)
     }
 }
 
 graph.scaleDown = function() {
-    graph.incrementX *= 0.95
-    graph.incrementY *= 0.95
+    graph.incrementX *= 0.90
+    graph.incrementY *= 0.90
+    graph.maxCreatures /= 0.90
     graph.wipe()
     graph.draw()
 }
