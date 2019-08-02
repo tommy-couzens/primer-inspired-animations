@@ -31,19 +31,13 @@ graph.draw();
 function run() {
   let now = new Date().getTime() - startTime;
 
-  // Increase the epoch every 300ms
+  // Increase the epoch every 200ms
   if ( now - last > 200) {
 	last = now;
 	State.nextEpoch();
   }
 
-  wipeScreen();
-
-  for (const [colour, array] of Object.entries(State.runningTotals)) {
-    graph.drawLine(array, colour, map.width + 100, canvas.height - 100, 8);
-  }
-
-  graph.drawLine(State.runningTotals["blue"], "blue", map.width + 100, canvas.height - 100, 8);
+  wipeScreen();  
 
   for (const array of Object.values(State.creatures)) {
     array.forEach(creature => {
