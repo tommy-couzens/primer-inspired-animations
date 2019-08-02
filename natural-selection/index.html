@@ -19,7 +19,7 @@
 <script>
 
 
-creatures = [new Creature(new Vector(50, 50), new Vector(2,2), 2)];
+creatures = [new Creature(new Vector(50, 50), new Vector(2,2), 2), new Creature(new Vector(50, 50), new Vector(-1.5,-2.5), 2)];
 console.log(creatures)
 
 function run() {
@@ -27,6 +27,7 @@ function run() {
 	creatures.forEach(creature => {
 		
 		creature.draw();
+		creature.drawSense();
 		creature.move();
 	})
 	requestAnimationFrame(run);

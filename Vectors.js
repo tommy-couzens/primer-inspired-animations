@@ -1,5 +1,9 @@
 //define vectors
-var Vector = function(x, y) {
+// It may be worth copy victors for things like angles
+// Code: https://github.com/maxkueng/victor
+// Documentation: http://victorjs.org
+
+let Vector = function(x, y) {
 	this.x = x;
 	this.y = y;
 }
@@ -12,15 +16,11 @@ Vector.prototype.minus = function(vector) {
 	return new Vector (this.x - vector.x, this.y - vector.y);
 };
 Vector.prototype.mul = function(scalar) {
-	// var answer = new Vector (this.x*scalar, this.y*scalar);
-	// return answer;
-	// var answer = new Vector (this.x*scalar, this.y*scalar);
 	this.x *= scalar
 	this.y *= scalar
 	return this
 };
 Vector.prototype.div = function(scalar) {
-	// return new Vector (this.x/scalar, this.y/scalar);
 	this.x /= scalar;
 	this.y /= scalar;
 	return this;

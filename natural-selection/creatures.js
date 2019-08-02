@@ -8,8 +8,8 @@ class Creature {
         this.speed = speed;
         this.size = size;
         this.sense = sense;
-
     }
+
     move() {
         // change direction at boundaries
         if (this.position.x + this.size*15 > map.width || this.position.x - this.size*15 < 0) {
@@ -22,8 +22,13 @@ class Creature {
         // move
         this.position.add(this.velocity)
     }
+
     draw() {
         circle(this.position.x, this.position.y, this.size*15, this.colour);
+    }
+
+    drawSense() {
+        circle(this.position.x, this.position.y, this.size*15 + this.sense*30, this.colour, false);
     }
 }
 
