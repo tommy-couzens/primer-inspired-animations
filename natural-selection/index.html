@@ -4,6 +4,7 @@
 	<title>natural selection</title>
 	<canvas id="canvas" style="border:1px solid #000000;"></canvas>
 	<script src="../geometry.js"></script>
+	<script src="../Vectors.js"></script>
 </head>
 <body>
 
@@ -11,9 +12,25 @@
 <!-- Builds the map -->
 <script src="canvas.js"></script>
 
+
+<!-- Draws the creatures -->
+<script src="creatures.js"></script>
+
 <script>
 
 
+creatures = [new Creature(new Vector(50, 50), new Vector(2,2), 2)];
+console.log(creatures)
 
-wipeScreen();
+function run() {
+	wipeScreen();
+	creatures.forEach(creature => {
+		
+		creature.draw();
+		creature.move();
+	})
+	requestAnimationFrame(run);
+}
+
+run();
 </script>
