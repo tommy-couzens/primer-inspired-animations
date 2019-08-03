@@ -17,11 +17,10 @@
 <script src="creatures.js"></script>
 <script src="food.js"></script>
 
+<!-- Manage epochs. An "epoch" is a round -->
+<script src="epoch.js"></script>
+
 <script>
-
-
-// creatures = [new Creature(new Vector(50, 50), new Vector(2,2), 2), new Creature(new Vector(800, 100), new Vector(-1.5,-2.5), 2)];
-
 
 let creatures = []
 for (let x = 50; x < canvas.width; x+= 100) {
@@ -31,16 +30,24 @@ for (let x = 50; x < canvas.width; x+= 100) {
 }
 
 let foodArray = []
-for (let i = 0; i < 50; i ++) {
-	const x = 100 + (canvas.width - 200)*Math.random()  // min + (max - min)*i
+for (let i = 0; i < 100; i ++) {
+	const x = 10 + (canvas.width - 20)*Math.random()  // min + (max - min)*i
 	const y = 100 + (canvas.height - 200)*Math.random()
 	foodArray.push(new Food(new Vector(x, y)))
 }
 
+epochArray = [new Epoch(creatures, foodArray)]
+
+
 function run() {
+	epoch = epochArray[epochArray.length - 1]
 	wipeScreen();
-	const uneatenFood = foodArray.filter(food => !food.eaten)
-	const aliveCreatures = creatures.filter(creature => creature.energy > 0)
+	const uneatenFood = epoch.food.filter(food => !food.eaten)
+	const aliveCreatures = epoch.creatures.filter(creature => creature.energy > 0)
+	if (aliveCreatures.length == 0) {
+		nextEpoch(epoch, epochArray)
+	}
+
 	aliveCreatures.forEach(creature => {
 		creature.draw();
 		creature.drawSense();
@@ -50,7 +57,7 @@ function run() {
 		creature.move();
 	})
 
-	foodArray.forEach(food => {
+	epoch.food.forEach(food => {
 		if ( !food.eaten) {
 			food.draw()
 		} 
