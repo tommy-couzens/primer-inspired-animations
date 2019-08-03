@@ -5,7 +5,6 @@ class Creature {
 
         this.energy = 100;
         this.foodEaten = 0;
-        this.alive = true;
 
         this.speed = speed;
         this.size = size;

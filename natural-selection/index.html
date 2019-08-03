@@ -39,11 +39,13 @@ for (let i = 0; i < 50; i ++) {
 
 function run() {
 	wipeScreen();
-	creatures.forEach(creature => {
+	const uneatenFood = foodArray.filter(food => !food.eaten)
+	const aliveCreatures = creatures.filter(creature => creature.energy > 0)
+	aliveCreatures.forEach(creature => {
 		creature.draw();
 		creature.drawSense();
 		creature.drawEnergy();
-		creature.detectFood(foodArray.filter(food => !food.eaten));
+		creature.detectFood(uneatenFood);
 		creature.move();
 	})
 
