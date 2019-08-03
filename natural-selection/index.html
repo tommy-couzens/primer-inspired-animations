@@ -29,12 +29,7 @@ for (let x = 50; x < canvas.width; x+= 100) {
 	creatures.push(new Creature(new Vector(x, canvas.height - 50), new Vector(0, -1) ) )
 }
 
-let foodArray = []
-for (let i = 0; i < 100; i ++) {
-	const x = 10 + (canvas.width - 20)*Math.random()  // min + (max - min)*i
-	const y = 100 + (canvas.height - 200)*Math.random()
-	foodArray.push(new Food(new Vector(x, y)))
-}
+foodArray = generateFood(100)
 
 epochArray = [new Epoch(creatures, foodArray)]
 

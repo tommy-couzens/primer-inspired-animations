@@ -21,9 +21,5 @@ function nextEpoch(epoch, epochArray) {
     })
     console.log(worthyCreatures)
 
-    const foodArray = epoch.food
-    foodArray.forEach(food => {
-        this.eaten = false
-    })
-    epochArray.push(new Epoch(worthyCreatures, foodArray))
+    epochArray.push(new Epoch(worthyCreatures, generateFood(100)))
 }
