@@ -4,6 +4,7 @@
 	<title>natural selection</title>
 	<canvas id="canvas" style="border:1px solid #000000;"></canvas>
 	<script src="../geometry.js"></script>
+	<script src="../Vectors.js"></script>
 </head>
 <body>
 
@@ -11,9 +12,51 @@
 <!-- Builds the map -->
 <script src="canvas.js"></script>
 
+
+<!-- Draws the creatures -->
+<script src="creatures.js"></script>
+<script src="food.js"></script>
+
 <script>
 
 
+// creatures = [new Creature(new Vector(50, 50), new Vector(2,2), 2), new Creature(new Vector(800, 100), new Vector(-1.5,-2.5), 2)];
 
-wipeScreen();
+
+let creatures = []
+for (let x = 50; x < canvas.width; x+= 100) {
+	// creatures.push(new Creature(new Vector(x, 50), (new Vector(x, 50)).directionTowards(canvas.width/2, canvas.height/2) ))
+	creatures.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
+	creatures.push(new Creature(new Vector(x, canvas.height - 50), new Vector(0, -1) ) )
+}
+
+let foodArray = []
+for (let i = 0; i < 50; i ++) {
+	const x = 100 + (canvas.width - 200)*Math.random()  // min + (max - min)*i
+	const y = 100 + (canvas.height - 200)*Math.random()
+	foodArray.push(new Food(new Vector(x, y)))
+}
+
+function run() {
+	wipeScreen();
+	const uneatenFood = foodArray.filter(food => !food.eaten)
+	const aliveCreatures = creatures.filter(creature => creature.energy > 0)
+	aliveCreatures.forEach(creature => {
+		creature.draw();
+		creature.drawSense();
+		creature.drawEnergy();
+		creature.drawFoodEaten();
+		creature.detectFood(uneatenFood);
+		creature.move();
+	})
+
+	foodArray.forEach(food => {
+		if ( !food.eaten) {
+			food.draw()
+		} 
+	})
+	requestAnimationFrame(run);
+}
+
+run();
 </script>

@@ -10,7 +10,8 @@ canvas.height = window.innerHeight -50
 canvas.style.border = "10px solid";
 
 map = {}
-map.width = canvas.width/2 -50;
+// map.width = canvas.width/2 -50;
+map.width = canvas.width;
 map.height = canvas.height;
 
 function wipeScreen() {

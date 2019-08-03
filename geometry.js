@@ -1,10 +1,12 @@
-function circle(x, y, radius, colour="green") {
+function circle(x, y, radius, colour="green", fill = true) {
 	ctx.beginPath();
 	ctx.arc(x, y, radius, 0, 2*Math.PI,true);
 	ctx.fillStyle = colour;
 	ctx.strokeStyle = "black"
 	ctx.lineWidth = radius/15;
-	ctx.fill();
+	if (fill) {
+		ctx.fill();
+	}
 	ctx.stroke();
 }
 
