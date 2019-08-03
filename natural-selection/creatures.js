@@ -29,30 +29,30 @@ class Creature {
     }
 
     detectFood(foodArray) {
-        let closestFood = null
-        let closestDistance = Number.MAX_SAFE_INTEGER
-        foodArray.forEach(food => {
-            let distance = this.position.distanceTo(food.position)
-            if (this.position.distanceTo(food.position) < this.sense && distance < closestDistance) {
-                closestDistance = distance
-                closestFood = food
+        if (foodArray.length > 0) {
+            const distanceFromFood = (food) => {
+                return this.position.distanceTo(food.position)
             }
-            if (closestFood) {
-                // If it gets to the food, eat it. Else, run towards it
-                if (this.position.distanceTo(closestFood.position) < this.size) {
-                    this.eatFood(closestFood, foodArray)
+            const closerFood = (food1, food2) => {
+                if (Math.min(distanceFromFood(food1) < distanceFromFood(food2))) {
+                    return food1;
                 } else {
-                    this.velocity = this.position.directionTowards(closestFood.position)
-                    this.velocity.setToSpeed(this.speed)
+                    return food2;
                 }
             }
-        })
+            const closestFood = foodArray.reduce((a, b) => closerFood(a,b))
+
+            if (distanceFromFood(closestFood) < this.size) {
+                this.eatFood(closestFood, foodArray)
+            } else if (distanceFromFood(closestFood) < this.sense) {
+                this.velocity = this.position.directionTowards(closestFood.position).setToSpeed(this.speed)
+            }
+        }
     }
 
     eatFood(food, foodArray) {
         this.foodEaten += 1;
-        let index = foodArray.indexOf(food);
-        console.log(index)
+        const index = foodArray.indexOf(food);
         if (index > -1) {
             foodArray.splice(index, 1);
         }
