@@ -1,10 +1,11 @@
 class Creature {
-    constructor(position, velocity, speed = 1, size = 15, sense = 120) {
+    constructor(position, velocity, speed = 1, size = 15, sense = 30) {
         this.position = position
         this.velocity = velocity.setToSpeed(speed)
 
         this.energy = 100;
         this.foodEaten = 0;
+        this.alive = true;
 
         this.speed = speed;
         this.size = size;
@@ -22,10 +23,17 @@ class Creature {
 
         // move
         this.position.add(this.velocity)
+        this.energy -= (Math.pow(this.speed, 2) + this.sense/30)/20
     }
 
     draw() {
         circle(this.position.x, this.position.y, this.size, this.colour);
+    }
+
+    drawEnergy() {
+        ctx.font = "10px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText( Math.floor(this.energy), this.position.x, this.position.y);
     }
 
     detectFood(foodArray) {
