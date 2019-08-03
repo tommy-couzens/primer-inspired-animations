@@ -29,12 +29,6 @@ class Creature {
         circle(this.position.x, this.position.y, this.size, this.colour);
     }
 
-    drawEnergy() {
-        ctx.font = "10px Arial";
-        ctx.fillStyle = "black";
-        ctx.fillText( Math.floor(this.energy), this.position.x, this.position.y);
-    }
-
     detectFood(foodArray) {
         if (foodArray.length > 0) {
             const distanceFromFood = (food) => {
@@ -61,7 +55,17 @@ class Creature {
         this.foodEaten += 1;
         food.eaten = true;
     }
-
+    drawEnergy() {
+        ctx.font = "10px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText( Math.floor(this.energy), this.position.x, this.position.y);
+    }
+    
+    drawFoodEaten() {
+        ctx.font = "10px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText( this.foodEaten, this.position.x, this.position.y + 10);
+    }
     drawSense() {
         circle(this.position.x, this.position.y, this.sense, this.colour, false);
     }
