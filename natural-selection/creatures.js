@@ -51,20 +51,16 @@ class Creature {
             const closestFood = foodArray.reduce((a, b) => closerFood(a,b))
 
             if (distanceFromFood(closestFood) < this.size) {
-                this.eatFood(closestFood, foodArray)
+                this.eatFood(closestFood)
             } else if (distanceFromFood(closestFood) < this.sense) {
                 this.velocity = this.position.directionTowards(closestFood.position).setToSpeed(this.speed)
             }
         }
     }
 
-    eatFood(food, foodArray) {
+    eatFood(food) {
         this.foodEaten += 1;
-        const index = foodArray.indexOf(food);
-        if (index > -1) {
-            foodArray.splice(index, 1);
-        }
-        
+        food.eaten = true;
     }
 
     drawSense() {
