@@ -27,11 +27,11 @@ function nextEpoch(epoch, epochArray) {
 
     // mutate
     replicants.forEach(function(replicant) {
-        if (Math.random() < 0.10) {
+        if (Math.random() < 1.0 ) {
             if (Math.random() < 0.5)  {
-                replicant.speed += 0.10
+                replicant.speed += 0.05
             } else {
-                replicant.speed -= 0.10
+                replicant.speed -= 0.05
             }
         }
     })

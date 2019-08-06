@@ -1,15 +1,15 @@
 class Creature {
     constructor(position, velocity, speed = 1 + 2*Math.random(), size = 15, sense = 30 + 30*Math.random()) {
         this.position = position
-        this.velocity = velocity.setToSpeed(speed)
-
-        this.energy = 100;
-        this.foodEaten = 0;
-
         this.speed = 1;
+        this.velocity = velocity.setToSpeed(this.speed)
+
         this.size = size;
         this.sense = sense;
         this.sense = 45;
+
+        this.energy = 100;
+        this.foodEaten = 0;
     }
 
     move() {
