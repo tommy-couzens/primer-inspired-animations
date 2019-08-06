@@ -31,7 +31,7 @@ for (let x = 50; x < canvas.width; x+= 100) {
 
 // creatures.push(new Creature(new Vector(50, 50), new Vector(0, 1) ) )
 // creatures.push(new Creature(new Vector(canvas.width, 50), new Vector(0, 1) ) )
-console.log(creatures)
+console.log(creatures.length)
 
 foodArray = generateFood(100)
 
@@ -49,8 +49,9 @@ function run() {
 
 	aliveCreatures.forEach(creature => {
 		creature.draw();
-		creature.drawSense();
-		creature.drawEnergy();
+		// creature.drawSense();
+		// creature.drawEnergy();
+		creature.drawSpeed();
 		creature.drawFoodEaten();
 		creature.detectFood(uneatenFood);
 		creature.move();

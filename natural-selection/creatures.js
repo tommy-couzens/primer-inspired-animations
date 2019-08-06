@@ -6,9 +6,10 @@ class Creature {
         this.energy = 100;
         this.foodEaten = 0;
 
-        this.speed = speed;
+        this.speed = 1;
         this.size = size;
         this.sense = sense;
+        this.sense = 45;
     }
 
     move() {
@@ -56,15 +57,20 @@ class Creature {
         food.eaten = true;
     }
     drawEnergy() {
-        ctx.font = "10px Arial";
+        ctx.font = "15px Arial";
         ctx.fillStyle = "black";
-        ctx.fillText( Math.floor(this.energy), this.position.x, this.position.y);
+        ctx.fillText( Math.floor(this.energy), this.position.x -5, this.position.y);
     }
     
     drawFoodEaten() {
-        ctx.font = "10px Arial";
+        ctx.font = "15px Arial";
         ctx.fillStyle = "black";
-        ctx.fillText( this.foodEaten, this.position.x, this.position.y + 10);
+        ctx.fillText( this.foodEaten, this.position.x - 5, this.position.y + 10);
+    }
+    drawSpeed() {
+        ctx.font = "15px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText( this.speed.toFixed(2), this.position.x - 5, this.position.y);
     }
     drawSense() {
         circle(this.position.x, this.position.y, this.sense, this.colour, false);
