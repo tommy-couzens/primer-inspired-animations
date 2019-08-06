@@ -1,7 +1,7 @@
 class Creature {
-    constructor(position, velocity, speed = 1 + 2*Math.random(), size = 15, sense = 30 + 30*Math.random()) {
+    constructor(position, velocity, speed = 1, size = 15, sense = 30 + 30*Math.random()) {
         this.position = position
-        this.speed = 1;
+        this.speed = speed;
         this.velocity = velocity.setToSpeed(this.speed)
 
         this.size = size;
