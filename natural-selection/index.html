@@ -29,6 +29,10 @@ for (let x = 50; x < canvas.width; x+= 100) {
 	creatures.push(new Creature(new Vector(x, canvas.height - 50), new Vector(0, -1) ) )
 }
 
+// creatures.push(new Creature(new Vector(50, 50), new Vector(0, 1) ) )
+// creatures.push(new Creature(new Vector(canvas.width, 50), new Vector(0, 1) ) )
+console.log(creatures)
+
 foodArray = generateFood(100)
 
 epochArray = [new Epoch(creatures, foodArray)]
