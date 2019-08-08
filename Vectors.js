@@ -13,15 +13,17 @@ Vector.prototype.add = function(vector) {
 	return this
 };
 
+Vector.prototype.plus = function(vector) {
+	return new Vector(this.x + vector.x, this.y + vector.y)
+};
+
 Vector.prototype.minus = function(vector) {
 	this.x -= vector.x
 	this.y -= vector.y
 	return this
 };
 Vector.prototype.mul = function(scalar) {
-	this.x *= scalar
-	this.y *= scalar
-	return this
+	return new Vector(this.x*scalar, this.y*scalar)
 };
 Vector.prototype.div = function(scalar) {
 	this.x /= scalar;

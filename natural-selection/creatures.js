@@ -1,14 +1,15 @@
 class Creature {
-    constructor(position, velocity, speed = 1, size = 15, sense = 30) {
+    constructor(position, velocity, speed = 1, size = 15, sense = 45) {
         this.position = position
-        this.velocity = velocity.setToSpeed(speed)
+        this.speed = speed;
+        this.velocity = velocity.setToSpeed(this.speed)
+
+        this.size = size;
+        this.sense = sense;
+        this.sense = 45;
 
         this.energy = 100;
         this.foodEaten = 0;
-
-        this.speed = speed;
-        this.size = size;
-        this.sense = sense;
     }
 
     move() {
@@ -56,15 +57,20 @@ class Creature {
         food.eaten = true;
     }
     drawEnergy() {
-        ctx.font = "10px Arial";
+        ctx.font = "15px Arial";
         ctx.fillStyle = "black";
-        ctx.fillText( Math.floor(this.energy), this.position.x, this.position.y);
+        ctx.fillText( Math.floor(this.energy), this.position.x -5, this.position.y);
     }
     
     drawFoodEaten() {
-        ctx.font = "10px Arial";
+        ctx.font = "15px Arial";
         ctx.fillStyle = "black";
-        ctx.fillText( this.foodEaten, this.position.x, this.position.y + 10);
+        ctx.fillText( this.foodEaten, this.position.x - 5, this.position.y + 10);
+    }
+    drawSpeed() {
+        ctx.font = "15px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText( this.speed.toFixed(2), this.position.x - 5, this.position.y);
     }
     drawSense() {
         circle(this.position.x, this.position.y, this.sense, this.colour, false);
