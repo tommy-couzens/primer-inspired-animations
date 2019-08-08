@@ -25,3 +25,8 @@ function square(x1, y1, x2, y2, colour = "black") {
 	ctx.fillStyle = colour;
 	ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
 }
+
+function arrow(x, y, length, colour = "black") {
+	line(x, y, x - length, y + length, colour, 2);
+	line(x, y, x + length, y + length, colour, 2);
+}

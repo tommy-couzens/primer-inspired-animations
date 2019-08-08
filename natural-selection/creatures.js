@@ -74,9 +74,13 @@ class Creature {
         ctx.fillText( this.foodEaten, this.position.x - 5, this.position.y + 10);
     }
     drawSpeed() {
-        ctx.font = "15px Arial";
-        ctx.fillStyle = "black";
-        ctx.fillText( this.speed.toFixed(2), this.position.x - 5, this.position.y);
+        const speedUpgrades = Math.round(this.speed*5) -5
+        for (let i = 0; i < speedUpgrades; i++) {
+            arrow(this.position.x, this.position.y - 8 + i*5, this.size/2, "lightgreen")
+        }
+        for (let i = 0; i > speedUpgrades; i--) {
+            arrow(this.position.x, this.position.y - 8 - i*5, this.size/2, "red")
+        }
     }
     drawSense() {
         circle(this.position.x, this.position.y, this.sense, "rgba(0, 0, 255, 0.2)");

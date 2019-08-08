@@ -71,11 +71,12 @@ function run() {
 		creature.draw();
 		creature.drawSense();
 		// creature.drawEnergy();
-		// creature.drawSpeed();
+		creature.drawSpeed();
 		// creature.drawFoodEaten();
 		creature.detectFood(uneatenFood);
 		creature.move();
 	})
+	arrow(500, 1000, this.size/2)
 
 	epoch.food.forEach(food => {
 		if ( !food.eaten) {
