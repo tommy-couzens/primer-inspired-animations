@@ -22,18 +22,24 @@ const createReplicants = (replicantWorthy) => {
     return replicants
 }
 
+const posOrNeg = function() {
+    if (Math.random() > 0.5) {
+        return 1
+    } else {
+        return -1
+    }
+}
+
 function nextEpoch(epoch, epochArray) {
     let worthyCreatures = epoch.creatures.filter(creature => creature.foodEaten >= 1)
     let replicants = createReplicants(epoch.creatures.filter(creature => creature.foodEaten >= 2))
 
     // mutate
     replicants.forEach(function(replicant) {
-        if (Math.random() < 0.66 ) {
-            if (Math.random() < 0.5)  {
-                replicant.speed += 0.20
-            } else {
-                replicant.speed -= 0.20
-            }
+        if (Math.random() < 0.50 ) {
+            replicant.speed += 0.20*posOrNeg()
+        } else if (true) {
+            replicant.sense += 10*posOrNeg()
         }
     })
     let nextGen = worthyCreatures.concat(replicants)
