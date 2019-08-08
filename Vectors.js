@@ -25,6 +25,12 @@ Vector.prototype.minus = function(vector) {
 Vector.prototype.mul = function(scalar) {
 	return new Vector(this.x*scalar, this.y*scalar)
 };
+
+Vector.prototype.times = function(scalar){
+	this.x *= scalar
+	this.y *= scalar
+	return this
+}
 Vector.prototype.div = function(scalar) {
 	this.x /= scalar;
 	this.y /= scalar;
