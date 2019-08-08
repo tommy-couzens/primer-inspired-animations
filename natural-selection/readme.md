@@ -12,6 +12,9 @@ Experiment to try:
 
 Let the creatures speed evolve with high sense and low sense. With high sense higher speed should prevail since they detect then steal the food quicker, whereas on low sense lower speed should prevail since the creatures rely more on luckily stumbling upon a food.
 
+Other idea:
+Food doubles in two each round or some other dependancy based on how much food there was last round.
+
 Look at this article on optimising canvas:
 https://www.html5rocks.com/en/tutorials/canvas/performance/
 

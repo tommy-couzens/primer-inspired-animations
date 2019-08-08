@@ -58,17 +58,12 @@ function run() {
 	
 	wipeScreen();
 	drawDividerLine()
-	// speedData = [5, 3, 12, 9, 3, 9, 12]
-	// speedData = [0, 0, 0, 0, 0, 0, 3]
-	// myChart.data.datasets[0].data = speedData
-	// myChart.update()
 	const uneatenFood = epoch.food.filter(food => !food.eaten)
 	const aliveCreatures = epoch.creatures.filter(creature => creature.energy > 0)
 	if (aliveCreatures.length == 0) {
 		nextEpoch(epoch, epochArray)
 		epoch = epochArray[epochArray.length - 1]
 		myChart.data.datasets[0].data = speedArray(epoch.creatures)
-		console.log(speedArray(epoch.creatures))
 		myChart.update()
 	}
 
