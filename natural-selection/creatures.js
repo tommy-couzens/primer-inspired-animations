@@ -22,8 +22,8 @@ class Creature {
         }
 
         // move
-        this.position.add(this.velocity)
-        this.energy -= (Math.pow(this.speed, 2) + this.sense/30)/20
+        this.position.add(this.velocity.mul(GAMESPEED))
+        this.energy -= GAMESPEED*( (Math.pow(this.speed, 2) + this.sense/30)/20)
     }
 
     draw() {

@@ -37,6 +37,8 @@ foodArray = generateFood(100)
 
 epochArray = [new Epoch(creatures, foodArray)]
 
+const GAMESPEED = 2
+
 
 function run() {
 	epoch = epochArray[epochArray.length - 1]
@@ -50,8 +52,8 @@ function run() {
 	aliveCreatures.forEach(creature => {
 		creature.draw();
 		// creature.drawSense();
-		// creature.drawEnergy();
-		creature.drawSpeed();
+		creature.drawEnergy();
+		// creature.drawSpeed();
 		creature.drawFoodEaten();
 		creature.detectFood(uneatenFood);
 		creature.move();
