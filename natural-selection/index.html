@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>natural selection</title>
-	<canvas id="canvas" style="border:1px solid #000000; z-index: 2;"></canvas>
-	<canvas id="chart" style="position: absolute; left:500px; z-index: 1;"></canvas>
+	<canvas id="canvas" style="border:1px solid #000000;"></canvas>
+	<canvas id="senseChart" style="border:1px solid #000000;"></canvas>
 
 	<script src="../geometry.js"></script>
 	<script src="../Vectors.js"></script>
@@ -63,8 +63,8 @@ function run() {
 	if (aliveCreatures.length == 0) {
 		nextEpoch(epoch, epochArray)
 		epoch = epochArray[epochArray.length - 1]
-		myChart.data.datasets[0].data = speedArray(epoch.creatures)
-		myChart.update()
+		speedChart.data.datasets[0].data = speedArray(epoch.creatures)
+		speedChart.update()
 	}
 
 	aliveCreatures.forEach(creature => {
