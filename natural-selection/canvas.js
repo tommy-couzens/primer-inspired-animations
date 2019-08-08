@@ -17,9 +17,9 @@ map.height = canvas.height;
 function wipeScreen() {
     ctx.fillStyle = "lightblue";
     // ctx.fillRect(0, 0, map.width, map.height);
-    ctx.fillRect(0, 0, map.width, map.height);
+    ctx.fillRect(0, 0, map.width, map.height + 25);
 }
 
 function drawDividerLine() {
-    line(map.width, 0, map.width, map.height, "black", 10);
+    line(map.width, 0, map.width, map.height + 25, "black", 10);
 }

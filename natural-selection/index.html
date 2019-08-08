@@ -38,13 +38,12 @@ for (let x = 50; x < map.width; x+= 100) {
 
 // creatures.push(new Creature(new Vector(50, 50), new Vector(0, 1) ) )
 // creatures.push(new Creature(new Vector(map.width, 50), new Vector(0, 1) ) )
-console.log(creatures.length)
 
 foodArray = generateFood(100)
 
 epochArray = [new Epoch(creatures, foodArray)]
 
-const GAMESPEED = 2
+const GAMESPEED = 3
 
 drawDividerLine()
 
@@ -69,6 +68,7 @@ function run() {
 		nextEpoch(epoch, epochArray)
 		epoch = epochArray[epochArray.length - 1]
 		myChart.data.datasets[0].data = speedArray(epoch.creatures)
+		console.log(speedArray(epoch.creatures))
 		myChart.update()
 	}
 
@@ -76,8 +76,8 @@ function run() {
 		creature.draw();
 		// creature.drawSense();
 		// creature.drawEnergy();
-		creature.drawSpeed();
-		creature.drawFoodEaten();
+		// creature.drawSpeed();
+		// creature.drawFoodEaten();
 		creature.detectFood(uneatenFood);
 		creature.move();
 	})

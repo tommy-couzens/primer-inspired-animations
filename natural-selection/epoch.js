@@ -14,6 +14,7 @@ class Epoch {
 }
 
 const createReplicants = (replicantWorthy) => {
+
     let replicants = []
     replicantWorthy.forEach(creature => {
         replicants.push(new Creature(creature.position.plus(new Vector(creature.size, -creature.size)), creature.velocity.mul(-1), creature.speed, creature.size, creature.sense))
@@ -27,7 +28,7 @@ function nextEpoch(epoch, epochArray) {
 
     // mutate
     replicants.forEach(function(replicant) {
-        if (Math.random() < 1.0 ) {
+        if (Math.random() < 0.66 ) {
             if (Math.random() < 0.5)  {
                 replicant.speed += 0.20
             } else {
