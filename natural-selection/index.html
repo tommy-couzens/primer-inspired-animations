@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>natural selection</title>
-	<canvas id="canvas" style="border:1px solid #000000;"></canvas>
+	<canvas id="canvas" style="border:1px solid #000000; z-index: 2;"></canvas>
+	<canvas id="chart" style="position: absolute; left:500px; z-index: 1;"></canvas>
+
 	<script src="../geometry.js"></script>
 	<script src="../Vectors.js"></script>
 </head>
@@ -13,48 +15,64 @@
 <script src="canvas.js"></script>
 
 
+
+
 <!-- Draws the creatures -->
 <script src="creatures.js"></script>
 <script src="food.js"></script>
 
 <!-- Manage epochs. An "epoch" is a round -->
 <script src="epoch.js"></script>
+
+<!-- Draw the chart -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="chart.js"></script>
   
 <script>
 
 let creatures = []
-for (let x = 50; x < canvas.width; x+= 100) {
-	// creatures.push(new Creature(new Vector(x, 50), (new Vector(x, 50)).directionTowards(canvas.width/2, canvas.height/2) ))
+for (let x = 50; x < map.width; x+= 100) {
 	creatures.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
-	creatures.push(new Creature(new Vector(x, canvas.height - 50), new Vector(0, -1) ) )
+	creatures.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
 }
 
 // creatures.push(new Creature(new Vector(50, 50), new Vector(0, 1) ) )
-// creatures.push(new Creature(new Vector(canvas.width, 50), new Vector(0, 1) ) )
-console.log(creatures.length)
+// creatures.push(new Creature(new Vector(map.width, 50), new Vector(0, 1) ) )
 
 foodArray = generateFood(100)
 
 epochArray = [new Epoch(creatures, foodArray)]
 
-const GAMESPEED = 2
+const GAMESPEED = 3
 
+drawDividerLine()
+
+epoch = epochArray[epochArray.length - 1]
+
+speedData = speedArray(creatures)
+
+// Use this as a function
+function setup() {}
 
 function run() {
-	epoch = epochArray[epochArray.length - 1]
+	
 	wipeScreen();
+	drawDividerLine()
 	const uneatenFood = epoch.food.filter(food => !food.eaten)
 	const aliveCreatures = epoch.creatures.filter(creature => creature.energy > 0)
 	if (aliveCreatures.length == 0) {
 		nextEpoch(epoch, epochArray)
+		epoch = epochArray[epochArray.length - 1]
+		myChart.data.datasets[0].data = speedArray(epoch.creatures)
+		myChart.update()
 	}
 
 	aliveCreatures.forEach(creature => {
 		creature.draw();
 		// creature.drawSense();
 		// creature.drawEnergy();
-		creature.drawSpeed();
-		creature.drawFoodEaten();
+		// creature.drawSpeed();
+		// creature.drawFoodEaten();
 		creature.detectFood(uneatenFood);
 		creature.move();
 	})
