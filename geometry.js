@@ -10,11 +10,12 @@ function circle(x, y, radius, colour="green", fill = true) {
 	ctx.stroke();
 }
 
-function line(x1, y1, x2, y2, colour = "black") {
+function line(x1, y1, x2, y2, colour = "black", width="10") {
 	ctx.beginPath();
 	ctx.moveTo(x1, y1);
 	ctx.lineTo(x2, y2);
 	ctx.strokeStyle=colour;
+	ctx.lineWidth = width;
 	ctx.stroke();
 }
 

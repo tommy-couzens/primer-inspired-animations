@@ -14,7 +14,7 @@ class Creature {
 
     move() {
         // change direction at boundaries
-        if (this.position.x + this.size > map.width || this.position.x - this.size < 0) {
+        if (this.position.x + this.size + 5 > map.width || this.position.x - this.size < 0) {
             this.velocity.x *= -1
         }
         if (this.position.y + this.size > map.height || this.position.y - this.size < 0) {
