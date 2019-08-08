@@ -3,11 +3,13 @@ function circle(x, y, radius, colour="green", fill = true) {
 	ctx.arc(x, y, radius, 0, 2*Math.PI,true);
 	ctx.fillStyle = colour;
 	ctx.strokeStyle = "black"
+	ctx.strokeStyle = colour;
 	ctx.lineWidth = radius/15;
 	if (fill) {
 		ctx.fill();
+	} else {
+		ctx.stroke();
 	}
-	ctx.stroke();
 }
 
 function line(x1, y1, x2, y2, colour = "black", width="10") {

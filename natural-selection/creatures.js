@@ -79,7 +79,7 @@ class Creature {
         ctx.fillText( this.speed.toFixed(2), this.position.x - 5, this.position.y);
     }
     drawSense() {
-        circle(this.position.x, this.position.y, this.sense, this.colour, false);
+        circle(this.position.x, this.position.y, this.sense, "rgba(0, 0, 255, 0.2)");
     }
 }
 
