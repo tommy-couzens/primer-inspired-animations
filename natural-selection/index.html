@@ -49,17 +49,12 @@ drawDividerLine()
 
 epoch = epochArray[epochArray.length - 1]
 
-speedData = speedArray(creatures1)
-
 // Use this as a function
 function setup() {}
 
-const aCount = (array) => {
-	new Map([...new Set(array)].map(
-    x => [x, array.filter(y => y === x).length]
-))
-};
-
+const countMap = (array) => {
+	return new Map([...new Set(array)].map(x => [x, array.filter(y => y ==x).length]).sort())
+}
 function rgb(r, g, b){
   return "rgb("+r+","+g+","+b+")";
 }
@@ -74,14 +69,10 @@ function run() {
 		nextEpoch(epoch, epochArray)
 		epoch = epochArray[epochArray.length - 1]
 
-		let speeds = epoch.creatures.map(creature => creature.speed.toFixed(2))
-		uniqueSpeeds = Array.from(new Set(speeds)).sort()
-
-		console.log(aCount(speeds))
-		
-
-		speedChart.data.datasets[0].data = speedArray(epoch.creatures)
-		// speedChart.data.labels = uniqueSpeeds
+		const speeds = epoch.creatures.map(creature => creature.speed.toFixed(2))
+		const speedMap = countMap(speeds)
+		speedChart.data.labels = Array.from(speedMap.keys())
+		speedChart.data.datasets[0].data = Array.from(speedMap.values())
 		speedChart.update()
 	}
 

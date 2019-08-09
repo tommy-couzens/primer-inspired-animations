@@ -1,19 +1,10 @@
-// make this function declarative rather than using forEach, do a filter and reduce instead?
-const speedArray = function(creatures){
-    let array =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    creatures.forEach(creature => {
-        array[Math.round(creature.speed*5)]++
-    })
-    return array
-}
-
 const speedData1 = {
-    labels: ['0', '0.2', '0.4', '0.6', '0.8', '1', '1.2', '1.4', '1.6', '1.8', '2.0', '2.2', '2.4', '2.6', '2.8', '3.0', '3.2'],
+    labels: ["1.00"],
     datasets: [{
         label: 'Speed',
         backgroundColor: 'rgb(255, 255, 132)',
         borderColor: 'rgb(0, 0, 0)',
-        data: [0, 0, 0, 0, 0, 8, 0, 0, 0, 0]
+        data: [8]
     }]
 }
 const speedChart = new Chart(ctx, {
