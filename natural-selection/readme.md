@@ -1,5 +1,6 @@
 To do:   
 - Add a mode where there is no epochs / rounds, but creatures gain 100 energy every time they find food, and replicate every time they get to 200 energy or above.
+- Idea: the above mode could be a clicker game where you click to produce food, rather than it just appearing randomly!
 - Add a visual indicator in the form of green / red arrows for speed
 - Make the visual indicator for sense transparent, maybe make it fill a transparent area rather than just one circle
 - Represent energy by colour

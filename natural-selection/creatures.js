@@ -32,7 +32,7 @@ class Creature {
     }
 
     draw() {
-        circle(this.position.x, this.position.y, this.size, this.colour);
+        circle(this.position.x, this.position.y, this.size, rgb(0, (this.energy/100)*255, 140));
     }
 
     detectFood(foodArray) {
