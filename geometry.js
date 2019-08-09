@@ -27,6 +27,6 @@ function square(x1, y1, x2, y2, colour = "black") {
 }
 
 function arrow(x, y, length, colour = "black") {
-	line(x, y, x - length, y + length/2, colour, 2);
-	line(x, y, x + length, y + length/2, colour, 2);
+	line(x, y, x - length, y + length/2, colour, length/3);
+	line(x, y, x + length, y + length/2, colour, length/3);
 }

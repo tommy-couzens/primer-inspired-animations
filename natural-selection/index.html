@@ -31,13 +31,13 @@
 <script>
 
 let creatures = []
-for (let x = 50; x < map.width; x+= 100) {
-	creatures.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
-	creatures.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
-}
+// for (let x = 50; x < map.width; x+= 100) {
+// 	creatures.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
+// 	creatures.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
+// }
 
-// creatures.push(new Creature(new Vector(50, 50), new Vector(0, 1) ) )
-// creatures.push(new Creature(new Vector(map.width, 50), new Vector(0, 1) ) )
+creatures.push(new Creature(new Vector(50, 50), new Vector(0, 1) ) )
+creatures.push(new Creature(new Vector(map.width, 50), new Vector(0, 1) ) )
 
 foodArray = generateFood(100)
 

@@ -1,12 +1,11 @@
 class Creature {
-    constructor(position, velocity, speed = 1, size = 15, sense = 45) {
+    constructor(position, velocity, speed = 1, size = 15, sense = size*3) {
         this.position = position
         this.speed = speed;
         this.velocity = velocity.setToSpeed(this.speed)
 
         this.size = size;
         this.sense = sense;
-        this.sense = 45;
 
         this.energy = 100;
         this.foodEaten = 0;
@@ -74,16 +73,34 @@ class Creature {
         ctx.fillText( this.foodEaten, this.position.x - 5, this.position.y + 10);
     }
     drawSpeed() {
-        const speedUpgrades = Math.round(this.speed*5) -5
+        // Try and do this in a declarative way, only use const instead of let!
+        let speedUpgrades = Math.round(this.speed*5) -5
+        let colour = null
+        if (speedUpgrades > 0) {
+            if (speedUpgrades > 4) {
+                speedUpgrades -= 4
+                colour = "yellow"
+            } else {
+                colour = "lightgreen"
+            }
+        } else if (speedUpgrades < 0) {
+            speedUpgrades = Math.abs(speedUpgrades)
+            if (speedUpgrades > 4 ) {
+                speedUpgrades -= 4
+                colour = "darkred"
+            } else {
+                colour = "red"
+            }
+        }
         for (let i = 0; i < speedUpgrades; i++) {
-            arrow(this.position.x, this.position.y - 8 + i*5, this.size/2, "lightgreen")
+            arrow(this.position.x, this.position.y - this.size/2 + i*this.size/3, this.size/2, colour)
         }
-        for (let i = 0; i > speedUpgrades; i--) {
-            arrow(this.position.x, this.position.y - 8 - i*5, this.size/2, "red")
-        }
+        // for (let i = 0; i > speedUpgrades; i--) {
+        //     arrow(this.position.x, this.position.y - this.size/2 - i*this.size/3, this.size/2, "red")
+        // }
     }
     drawSense() {
-        circle(this.position.x, this.position.y, this.sense, "rgba(0, 0, 255, 0.2)");
+        circle(this.position.x, this.position.y, this.sense, "rgba(0, 0, 255, 0.1)");
     }
 }
 
