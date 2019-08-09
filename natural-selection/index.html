@@ -31,13 +31,13 @@
 <script>
 
 let creatures1 = []
-// for (let x = 50; x < map.width; x+= 100) {
-// 	creatures1.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
-// 	creatures1.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
-// }
+for (let x = 50; x < map.width; x+= 100) {
+	creatures1.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
+	creatures1.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
+}
 
-creatures1.push(new Creature(new Vector(50, 50), new Vector(0, 1) ) )
-creatures1.push(new Creature(new Vector(map.width, 50), new Vector(0, 1) ) )
+creatures1.push(new Creature(new Vector(50, 50), new Vector(0, 1), 1 ) )
+creatures1.push(new Creature(new Vector(250, 50), new Vector(0, 1), 1 ) )
 
 foodArray = generateFood(100)
 
@@ -54,6 +54,12 @@ speedData = speedArray(creatures1)
 // Use this as a function
 function setup() {}
 
+const aCount = (array) => {
+	new Map([...new Set(array)].map(
+    x => [x, array.filter(y => y === x).length]
+))
+};
+
 function run() {
 	
 	wipeScreen();
@@ -66,6 +72,9 @@ function run() {
 
 		let speeds = epoch.creatures.map(creature => creature.speed.toFixed(2))
 		uniqueSpeeds = Array.from(new Set(speeds)).sort()
+
+		console.log(aCount(speeds))
+		
 
 		speedChart.data.datasets[0].data = speedArray(epoch.creatures)
 		speedChart.data.labels = uniqueSpeeds

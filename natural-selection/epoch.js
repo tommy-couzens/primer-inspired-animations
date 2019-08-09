@@ -49,5 +49,5 @@ function nextEpoch(epoch, epochArray) {
         creature.energy = 100
         creature.foodEaten = 0  
     })
-    epochArray.push(new Epoch(nextGen, generateFood(100)))
+    epochArray.push(new Epoch(nextGen, generateFood(epoch.food.length)))
 }
