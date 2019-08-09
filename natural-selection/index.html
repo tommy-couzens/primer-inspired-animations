@@ -30,18 +30,18 @@
   
 <script>
 
-let creatures = []
+let creatures1 = []
 // for (let x = 50; x < map.width; x+= 100) {
-// 	creatures.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
-// 	creatures.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
+// 	creatures1.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
+// 	creatures1.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
 // }
 
-creatures.push(new Creature(new Vector(50, 50), new Vector(0, 1) ) )
-creatures.push(new Creature(new Vector(map.width, 50), new Vector(0, 1) ) )
+creatures1.push(new Creature(new Vector(50, 50), new Vector(0, 1) ) )
+creatures1.push(new Creature(new Vector(map.width, 50), new Vector(0, 1) ) )
 
 foodArray = generateFood(100)
 
-epochArray = [new Epoch(creatures, foodArray)]
+epochArray = [new Epoch(creatures1, foodArray)]
 
 const GAMESPEED = 3
 
@@ -49,7 +49,7 @@ drawDividerLine()
 
 epoch = epochArray[epochArray.length - 1]
 
-speedData = speedArray(creatures)
+speedData = speedArray(creatures1)
 
 // Use this as a function
 function setup() {}
@@ -63,7 +63,12 @@ function run() {
 	if (aliveCreatures.length == 0) {
 		nextEpoch(epoch, epochArray)
 		epoch = epochArray[epochArray.length - 1]
+
+		let speeds = epoch.creatures.map(creature => creature.speed.toFixed(2))
+		uniqueSpeeds = Array.from(new Set(speeds)).sort()
+
 		speedChart.data.datasets[0].data = speedArray(epoch.creatures)
+		speedChart.data.labels = uniqueSpeeds
 		speedChart.update()
 	}
 
