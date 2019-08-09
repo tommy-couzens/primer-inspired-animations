@@ -2,8 +2,9 @@
 <html>
 <head>
 	<title>natural selection</title>
-	<canvas id="canvas" style="border:1px solid #000000;"></canvas>
-	<canvas id="senseChart" style="border:1px solid #000000;"></canvas>
+	<canvas id="canvas" style="position: absolute; top: 0; left: 0; border:1px solid #000000;"></canvas>
+	<canvas id="speedChart" style="position: absolute; top: 0; left: 0; border:1px solid #000000;"></canvas>
+	<canvas id="senseChart" style="position: absolute; top: 0; left: 0; border:1px solid #000000;"></canvas>
 
 	<script src="../geometry.js"></script>
 	<script src="../Vectors.js"></script>
@@ -13,9 +14,6 @@
 
 <!-- Builds the map -->
 <script src="canvas.js"></script>
-
-
-
 
 <!-- Draws the creatures -->
 <script src="creatures.js"></script>
@@ -31,10 +29,10 @@
 <script>
 
 let creatures1 = []
-for (let x = 50; x < map.width; x+= 100) {
-	creatures1.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
-	creatures1.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
-}
+// for (let x = 50; x < map.width; x+= 100) {
+// 	creatures1.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
+// 	creatures1.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
+// }
 
 creatures1.push(new Creature(new Vector(50, 50), new Vector(0, 1), 1 ) )
 creatures1.push(new Creature(new Vector(250, 50), new Vector(0, 1), 1 ) )
@@ -74,6 +72,12 @@ function run() {
 		speedChart.data.labels = Array.from(speedMap.keys())
 		speedChart.data.datasets[0].data = Array.from(speedMap.values())
 		speedChart.update()
+
+		const senses = epoch.creatures.map(creature => creature.sense.toFixed(2))
+		const senseMap = countMap(senses)
+		senseChart.data.labels = Array.from(senseMap.keys())
+		senseChart.data.datasets[0].data = Array.from(senseMap.values())
+		senseChart.update()
 	}
 
 	aliveCreatures.forEach(creature => {

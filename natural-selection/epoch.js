@@ -38,10 +38,10 @@ function nextEpoch(epoch, epochArray) {
     replicants.forEach(function(replicant) {
         if (Math.random() < 0.66 ) {
             replicant.speed += 0.20*posOrNeg()
-        }
-        // } else if (true) {
-        //     replicant.sense += 10*posOrNeg()
         // }
+        } else if (true) {
+            replicant.sense += 10*posOrNeg()
+        }
     })
     let nextGen = worthyCreatures.concat(replicants)
 
