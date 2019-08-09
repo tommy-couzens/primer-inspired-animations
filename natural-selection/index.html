@@ -63,7 +63,8 @@ function run() {
 	drawDividerLine()
 	const uneatenFood = epoch.food.filter(food => !food.eaten)
 	const aliveCreatures = epoch.creatures.filter(creature => creature.energy > 0)
-	if (aliveCreatures.length == 0 || uneatenFood == 0) {
+	const hungryCreatures = aliveCreatures.filter(creature => creature.foodEaten < 2)
+	if (hungryCreatures.length == 0 || uneatenFood == 0) {
 		nextEpoch(epoch, epochArray)
 		epoch = epochArray[epochArray.length - 1]
 
@@ -80,7 +81,7 @@ function run() {
 		senseChart.update()
 	}
 
-	aliveCreatures.forEach(creature => {
+	hungryCreatures.forEach(creature => {
 		creature.draw();
 		creature.drawSense();
 		// creature.drawEnergy();
@@ -89,7 +90,6 @@ function run() {
 		creature.detectFood(uneatenFood);
 		creature.move();
 	})
-	arrow(500, 1000, this.size/2)
 
 	epoch.food.forEach(food => {
 		if ( !food.eaten) {
