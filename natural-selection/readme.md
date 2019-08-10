@@ -2,6 +2,7 @@ To do:
 - Add a mode where there is no epochs / rounds, but creatures gain 100 energy every time they find food, and replicate every time they get to 200 energy or above.
 - Idea: the above mode could be a clicker game where you click to produce food, rather than it just appearing randomly!
 - Make creatures not eat more than 2 food
+- Remove all instances of 'let' and make it 'const' instead to make code function
 - Add deacerleration and reacceleration when hitting walls to make it look more realistic
 - Above could then become a factor if you ever do NEAT machcine learning
 
