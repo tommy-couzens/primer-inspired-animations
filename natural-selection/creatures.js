@@ -75,25 +75,26 @@ class Creature {
     drawSpeed() {
         // Try and do this in a declarative way, only use const instead of let!
         let speedUpgrades = Math.round(this.speed*5) -5
-        let colour = null
-        if (speedUpgrades > 0) {
-            if (speedUpgrades > 4) {
-                speedUpgrades -= 4
-                colour = "yellow"
-            } else {
-                colour = "lightgreen"
-            }
-        } else if (speedUpgrades < 0) {
-            speedUpgrades = Math.abs(speedUpgrades)
-            if (speedUpgrades > 4 ) {
-                speedUpgrades -= 4
-                colour = "darkred"
-            } else {
-                colour = "red"
+        const colour = (number) => {
+            if (number > 0) {
+                if (number > 4) {
+                    number -= 4
+                    return "yellow"
+                } else {
+                    return "lightgreen"
+                }
+            } else if (number < 0) {
+                number = Math.abs(number)
+                if (number > 4 ) {
+                    number -= 4
+                    return "darkred"
+                } else {
+                    return "red"
+                }
             }
         }
         for (let i = 0; i < speedUpgrades; i++) {
-            arrow(this.position.x, this.position.y - this.size/2 + i*this.size/3, this.size/2, colour)
+            arrow(this.position.x, this.position.y - this.size/2 + i*this.size/3, this.size/2, colour(speedUpgrades))
         }
         // for (let i = 0; i > speedUpgrades; i--) {
         //     arrow(this.position.x, this.position.y - this.size/2 - i*this.size/3, this.size/2, "red")
