@@ -6,6 +6,8 @@ To do:
 - Add deacerleration and reacceleration when hitting walls to make it look more realistic
 - Above could then become a factor if you ever do NEAT machcine learning
 - Another factor for NEAT could be food that is varying size, then more fearsome creatures will go for that one  instead
+- Add 2d graph with speed and sense both plotted
+- Make game speed up when there is only 1 - 3 creatures left
 
 "each time a creature replicates, there is a chance that a mutation will give a creature a slightly lower or slightly higher speed"
 
