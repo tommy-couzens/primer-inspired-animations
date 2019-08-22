@@ -35,6 +35,12 @@ class Creature {
         circle(this.position.x, this.position.y, this.size, rgb(0, (this.energy/100)*255, 0));
     }
 
+   replicate() {
+     // temp method - is calling an outside array which is not good - maybe this should all be part of some creature creatures class
+      epoch.creatures.push(new Creature(this.position.plus(new Vector(this.size, -this.size)), this.velocity.mul(-1), this.speed, this.size, this.sense))
+      this.energy = 100
+}
+
     detectFood(foodArray) {
         if (foodArray.length > 0) {
             const distanceFromFood = (food) => {
@@ -58,8 +64,12 @@ class Creature {
     }
 
     eatFood(food) {
-        this.foodEaten += 1;
-        food.eaten = true;
+        // this.foodEaten++
+	this.energy += 5
+	food.energy -= 5
+	if (food.energy < 20) {
+	    food.eaten = true;
+	}
     }
     drawEnergy() {
         ctx.font = "15px Arial";

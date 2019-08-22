@@ -82,6 +82,9 @@ function run() {
 	}
 
 	hungryCreatures.forEach(creature => {
+		if (creature.energy > 200) {
+		   creature.replicate()
+		}
 		creature.draw();
 		// creature.drawSense();
 		// creature.drawEnergy();
@@ -92,7 +95,7 @@ function run() {
 	})
 
 	epoch.food.forEach(food => {
-		if ( !food.eaten) {
+		if ( !food.eaten ) {
 			food.draw()
 		} 
 	})

@@ -2,10 +2,11 @@ class Food {
     constructor(position) {
         this.position = position
         this.size = 5
+	this.energy = 100
         this.eaten = false
     }
     draw() {
-        circle(this.position.x, this.position.y, 5, "red");
+        circle(this.position.x, this.position.y, this.energy/20, "red");
     }
 }
 
