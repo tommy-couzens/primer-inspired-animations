@@ -35,9 +35,9 @@ let creatures1 = []
 // }
 
 creatures1.push(new Creature(new Vector(50, 50), new Vector(0, 1), 1 ) )
-// creatures1.push(new Creature(new Vector(250, 50), new Vector(0, 1), 1 ) )
+creatures1.push(new Creature(new Vector(250, 50), new Vector(0, 1), 1 ) )
 
-foodArray = generateFood(20)
+foodArray = generateFood(50)
 
 epochArray = [new Epoch(creatures1, foodArray)]
 
@@ -57,44 +57,53 @@ function rgb(r, g, b){
   return "rgb("+r+","+g+","+b+")";
 }
 
+function updateGraph() {
+	const speeds = epoch.creatures.map(creature => creature.speed.toFixed(2))
+	const speedMap = countMap(speeds)
+	speedChart.data.labels = Array.from(speedMap.keys())
+	speedChart.data.datasets[0].data = Array.from(speedMap.values())
+	speedChart.update()
+
+	const senses = epoch.creatures.map(creature => creature.sense.toFixed(2))
+	const senseMap = countMap(senses)
+	senseChart.data.labels = Array.from(senseMap.keys())
+	senseChart.data.datasets[0].data = Array.from(senseMap.values())
+	senseChart.update()
+}
+
 function run() {
-	
 	wipeScreen();
 	drawDividerLine()
 	const uneatenFood = epoch.food.filter(food => !food.eaten)
 	const aliveCreatures = epoch.creatures.filter(creature => creature.energy > 0)
 	const hungryCreatures = aliveCreatures.filter(creature => creature.foodEaten < 2)
-	if (hungryCreatures.length == 0 || uneatenFood == 0) {
-		nextEpoch(epoch, epochArray)
-		epoch = epochArray[epochArray.length - 1]
 
-		const speeds = epoch.creatures.map(creature => creature.speed.toFixed(2))
-		const speedMap = countMap(speeds)
-		speedChart.data.labels = Array.from(speedMap.keys())
-		speedChart.data.datasets[0].data = Array.from(speedMap.values())
-		speedChart.update()
+	updateGraph()
 
-		const senses = epoch.creatures.map(creature => creature.sense.toFixed(2))
-		const senseMap = countMap(senses)
-		senseChart.data.labels = Array.from(senseMap.keys())
-		senseChart.data.datasets[0].data = Array.from(senseMap.values())
-		senseChart.update()
-	}
-	console.log(hungryCreatures.length)
 	hungryCreatures.forEach(creature => {
 		creature.replicationTimer-- // Should probably do this per second and not per frame
 		if (creature.energy > 200 && creature.replicationTimer <= 0) {
 		   creature.replicate(epoch.creatures)
 		}
 		creature.draw();
-		// creature.drawSense();
-		creature.drawEnergy();
+		creature.drawSense();
+		creature.drawEnergy();	
 		creature.drawSpeed();
 		// creature.drawFoodEaten();
+		// if (creature.energy < 300) creature.detectFood(uneatenFood);
 		creature.detectFood(uneatenFood);
 		creature.move();
 	})
-    // epoch.food[0].replicate(epoch.food)
+	// Generate a random food
+	if (Math.random() < 0.05) {
+		const x = 10 + (map.width - 20)*Math.random()  // min + (max - min)*i
+		const y = 100 + (map.height - 200)*Math.random()
+		epoch.food.push(new Food(new Vector(x, y)))
+	}
+
+	// Say the creature count
+	ctx.fillText( "Creatures: " + hungryCreatures.length, map.width - 150, 50);
+
 	epoch.food.forEach(food => {
 		if ( !food.eaten ) {
 			// food.replicate(epoch.food)
@@ -103,7 +112,7 @@ function run() {
 				food.replicationTimer--
 				if (food.replicationTimer <= 0) {
 					food.replicate(epoch.food, 50)
-					food.replicationTimer = 300
+					food.replicationTimer = 1200
 				}
 			} else {
 				food.energy++

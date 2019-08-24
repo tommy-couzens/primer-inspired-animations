@@ -31,7 +31,7 @@ class Creature {
 
             // move
             this.position.add(this.velocity.mul(GAMESPEED))
-            this.energy -= (Math.pow(this.speed, 3) + (this.sense - 45)/15)/3
+            this.energy -= (Math.pow(this.speed, 3) + (this.sense)/45)/3
         }
     }
 
@@ -41,11 +41,20 @@ class Creature {
 
    replicate(creaturesArray) {
      // temp method - is calling an outside array which is not good - maybe this should all be part of some creature creatures class
-      this.energy -= 50
-      const x = this.position.x + 25 // - Math.random()*100
-      const y = this.position.y + 25 // - Math.random()*100
-      creaturesArray.push(new Creature(new Vector(x, y), this.velocity.mul(-1), this.speed, this.size, this.sense, 50))
-      this.replicationTimer = 600
+        this.energy -= 50
+        const x = this.position.x + 25 // - Math.random()*100
+        const y = this.position.y + 25 // - Math.random()*100
+
+        let replicantSpeed = this.speed
+        let replicantSense = this.sense
+        if (Math.random() < 0.66 ) {
+            replicantSpeed += 0.20*posOrNeg()
+        } else if (true) {
+            replicantSense += 10*posOrNeg()
+            if (replicantSense < 0) replicantSense = 0 // stop sense from giving energy
+        }
+        creaturesArray.push(new Creature(new Vector(x, y), this.velocity.mul(-1), replicantSpeed, this.size, replicantSense, 50))
+        this.replicationTimer = 600
 }
 
     detectFood(foodArray) {
@@ -62,12 +71,14 @@ class Creature {
             }
             const closestFood = foodArray.reduce((a, b) => closerFood(a,b))
 
-            this.eating = false
-            if (distanceFromFood(closestFood) < this.size) {
+            if (distanceFromFood(closestFood) < this.size && (this.energy < 300 || this.eating)) {
                 this.eating = true
                 this.eatFood(closestFood)
             } else if (distanceFromFood(closestFood) < this.sense) {
                 this.velocity = this.position.directionTowards(closestFood.position).setToSpeed(this.speed)
+                this.eating = false
+            } else {
+                this.eating = false
             }
         }
     }

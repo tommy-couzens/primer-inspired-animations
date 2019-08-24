@@ -13,10 +13,10 @@ class Food {
    replicate(foodArray, energy = 50) {
     let x = this.position.x + 50 - Math.random()*100
     let y = this.position.y + 50 - Math.random()*100
-    if (x < 0) x = 0
-    if (y < 0) y = 0
-    if (x > map.width) x = map.width
-    if (y > map.height) y = map.height
+    if (x < 0) x = this.size
+    if (y < 0) y = this.size
+    if (x > map.width) x = map.width - this.size
+    if (y > map.height) y = map.height - this.size
     foodArray.push(new Food(new Vector(x, y), energy))
   }
 }

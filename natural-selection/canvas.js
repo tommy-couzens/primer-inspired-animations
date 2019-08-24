@@ -6,6 +6,10 @@ var ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth/2 - 50
 canvas.height = window.innerHeight -50
 
+// Bigger  canvas
+// canvas.width = 2000
+// canvas.height = 1500
+
 // Give the canvas a border
 canvas.style.border = "10px solid";
 
