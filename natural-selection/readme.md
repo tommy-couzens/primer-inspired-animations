@@ -36,6 +36,9 @@ sense on 1500 x 1000 canvas:
 In 1500 x 1000:
 They pretty much all evolved to have 0 sense after quite some time. It seems the cost of sense is just too high compared to bumping into things. The population was going up and down in the range 30 - 70 for quite a while, but then once they got to all have sense of 0 and speed of 0.20 - 0.6 the population increased massively to 400. Really interesting, you could make a video out of this!
 
+After even more time the average speed dropped to 0.20 and the population has risen even more to 600
+Graphing this over time would be quite cool. I think it would steadily increase over time as speed decreases slowly.
+
 Other idea:
 Food doubles in two each round or some other dependancy based on how much food there was last round.
 
