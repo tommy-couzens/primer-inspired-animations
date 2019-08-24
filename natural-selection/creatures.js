@@ -1,12 +1,11 @@
 class Creature {
-    constructor(position, velocity, speed = 1, size = 15, sense = 45) {
+    constructor(position, velocity, speed = 1, size = 15, sense = size*3) {
         this.position = position
         this.speed = speed;
         this.velocity = velocity.setToSpeed(this.speed)
 
         this.size = size;
         this.sense = sense;
-        this.sense = 45;
 
         this.energy = 100;
         this.foodEaten = 0;
@@ -29,11 +28,11 @@ class Creature {
 
         // move
         this.position.add(this.velocity.mul(GAMESPEED))
-        this.energy -= GAMESPEED*( (Math.pow(this.speed, 2) + this.sense/30)/20)
+        this.energy -= (Math.pow(this.speed, 3) + (this.sense - 45)/15)/3
     }
 
     draw() {
-        circle(this.position.x, this.position.y, this.size, this.colour);
+        circle(this.position.x, this.position.y, this.size, rgb(0, (this.energy/100)*255, 0));
     }
 
     detectFood(foodArray) {
@@ -74,12 +73,35 @@ class Creature {
         ctx.fillText( this.foodEaten, this.position.x - 5, this.position.y + 10);
     }
     drawSpeed() {
-        ctx.font = "15px Arial";
-        ctx.fillStyle = "black";
-        ctx.fillText( this.speed.toFixed(2), this.position.x - 5, this.position.y);
+        // Try and do this in a declarative way, only use const instead of let!
+        let speedUpgrades = Math.round(this.speed*5) -5
+        const colour = (number) => {
+            if (number > 0) {
+                if (number > 4) {
+                    number -= 4
+                    return "yellow"
+                } else {
+                    return "lightgreen"
+                }
+            } else if (number < 0) {
+                number = Math.abs(number)
+                if (number > 4 ) {
+                    number -= 4
+                    return "darkred"
+                } else {
+                    return "red"
+                }
+            }
+        }
+        for (let i = 0; i < speedUpgrades; i++) {
+            arrow(this.position.x, this.position.y - this.size/2 + i*this.size/3, this.size/2, colour(speedUpgrades))
+        }
+        // for (let i = 0; i > speedUpgrades; i--) {
+        //     arrow(this.position.x, this.position.y - this.size/2 - i*this.size/3, this.size/2, "red")
+        // }
     }
     drawSense() {
-        circle(this.position.x, this.position.y, this.sense, this.colour, false);
+        circle(this.position.x, this.position.y, this.sense, "rgba(0, 0, 255, 0.1)");
     }
 }
 

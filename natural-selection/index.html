@@ -2,8 +2,9 @@
 <html>
 <head>
 	<title>natural selection</title>
-	<canvas id="canvas" style="border:1px solid #000000; z-index: 2;"></canvas>
-	<canvas id="chart" style="position: absolute; left:500px; z-index: 1;"></canvas>
+	<canvas id="canvas" style="position: absolute; top: 0; left: 0; border:1px solid #000000;"></canvas>
+	<canvas id="speedChart" style="position: absolute; top: 0; left: 0; border:1px solid #000000;"></canvas>
+	<canvas id="senseChart" style="position: absolute; top: 0; left: 0; border:1px solid #000000;"></canvas>
 
 	<script src="../geometry.js"></script>
 	<script src="../Vectors.js"></script>
@@ -13,9 +14,6 @@
 
 <!-- Builds the map -->
 <script src="canvas.js"></script>
-
-
-
 
 <!-- Draws the creatures -->
 <script src="creatures.js"></script>
@@ -30,18 +28,18 @@
   
 <script>
 
-let creatures = []
-for (let x = 50; x < map.width; x+= 100) {
-	creatures.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
-	creatures.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
-}
+let creatures1 = []
+// for (let x = 50; x < map.width; x+= 100) {
+// 	creatures1.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
+// 	creatures1.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
+// }
 
-// creatures.push(new Creature(new Vector(50, 50), new Vector(0, 1) ) )
-// creatures.push(new Creature(new Vector(map.width, 50), new Vector(0, 1) ) )
+creatures1.push(new Creature(new Vector(50, 50), new Vector(0, 1), 1 ) )
+creatures1.push(new Creature(new Vector(250, 50), new Vector(0, 1), 1 ) )
 
 foodArray = generateFood(100)
 
-epochArray = [new Epoch(creatures, foodArray)]
+epochArray = [new Epoch(creatures1, foodArray)]
 
 const GAMESPEED = 3
 
@@ -49,10 +47,15 @@ drawDividerLine()
 
 epoch = epochArray[epochArray.length - 1]
 
-speedData = speedArray(creatures)
-
 // Use this as a function
 function setup() {}
+
+const countMap = (array) => {
+	return new Map([...new Set(array)].map(x => [x, array.filter(y => y ==x).length]).sort())
+}
+function rgb(r, g, b){
+  return "rgb("+r+","+g+","+b+")";
+}
 
 function run() {
 	
@@ -60,18 +63,29 @@ function run() {
 	drawDividerLine()
 	const uneatenFood = epoch.food.filter(food => !food.eaten)
 	const aliveCreatures = epoch.creatures.filter(creature => creature.energy > 0)
-	if (aliveCreatures.length == 0) {
+	const hungryCreatures = aliveCreatures.filter(creature => creature.foodEaten < 2)
+	if (hungryCreatures.length == 0 || uneatenFood == 0) {
 		nextEpoch(epoch, epochArray)
 		epoch = epochArray[epochArray.length - 1]
-		myChart.data.datasets[0].data = speedArray(epoch.creatures)
-		myChart.update()
+
+		const speeds = epoch.creatures.map(creature => creature.speed.toFixed(2))
+		const speedMap = countMap(speeds)
+		speedChart.data.labels = Array.from(speedMap.keys())
+		speedChart.data.datasets[0].data = Array.from(speedMap.values())
+		speedChart.update()
+
+		const senses = epoch.creatures.map(creature => creature.sense.toFixed(2))
+		const senseMap = countMap(senses)
+		senseChart.data.labels = Array.from(senseMap.keys())
+		senseChart.data.datasets[0].data = Array.from(senseMap.values())
+		senseChart.update()
 	}
 
-	aliveCreatures.forEach(creature => {
+	hungryCreatures.forEach(creature => {
 		creature.draw();
 		// creature.drawSense();
 		// creature.drawEnergy();
-		// creature.drawSpeed();
+		creature.drawSpeed();
 		// creature.drawFoodEaten();
 		creature.detectFood(uneatenFood);
 		creature.move();

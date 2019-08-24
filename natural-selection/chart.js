@@ -1,37 +1,79 @@
-// make this function declarative rather than using forEach, do a filter and reduce instead?
+// Define canvas object
+var speedCanvas = document.getElementById("speedChart");
+var speedtx = speedCanvas.getContext("2d");
 
-const speedArray = function(creatures){
-    let array =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    creatures.forEach(creature => {
-        array[Math.round(creature.speed*5)]++
-    })
-    return array
-}
+// Set canvas to left half the size of the screen
+speedCanvas.width = window.innerWidth/2 - 50
+speedCanvas.height = window.innerHeight/2 -50
 
-const data = {
-    labels: ['0', '0.2', '0.4', '0.6', '0.8', '1', '1.2', '1.4', '1.6', '1.8', '2.0', '2.2'],
+const speedData1 = {
+    labels: ["1.00"],
     datasets: [{
         label: 'Speed',
         backgroundColor: 'rgb(255, 255, 132)',
         borderColor: 'rgb(0, 0, 0)',
-        data: [0, 0, 0, 0, 0, 8, 0, 0, 0, 0]
+        data: [8]
     }]
 }
-const myChart = new Chart(ctx, {
+const speedChart = new Chart(speedtx, {
     // The type of chart we want to create
     type: 'bar',
 
     // The data for our dataset
-    data: data,
+    data: speedData1,
 
     // Configuration options go here
     options: {
         layout: {
             padding: {
-                left: map.width,
-                right: 50,
+                left: window.innerWidth/2,
+                right: 0,
                 top: 0,
-                bottom: 0
+                bottom: window.innerHeight/2,
+            }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+}); 
+
+// Define canvas object
+var senseCanvas = document.getElementById("senseChart");
+var sensetx = senseCanvas.getContext("2d");
+
+// Set canvas to left half the size of the screen
+senseCanvas.width = window.innerWidth/2 - 50
+senseCanvas.height = window.innerHeight/2 -50
+
+const senseData1 = {
+    labels: ["1.00"],
+    datasets: [{
+        label: 'sense',
+        backgroundColor: 'rgb(0, 0, 132)',
+        borderColor: 'rgb(0, 0, 0)',
+        data: [8]
+    }]
+}
+const senseChart = new Chart(sensetx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: senseData1,
+
+    // Configuration options go here
+    options: {
+        layout: {
+            padding: {
+                left: window.innerWidth/2,
+                right: 0,
+                top: window.innerHeight/2,
+                bottom: 0,
             }
         },
         scales: {

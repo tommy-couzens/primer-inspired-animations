@@ -1,10 +1,13 @@
 To do:   
 - Add a mode where there is no epochs / rounds, but creatures gain 100 energy every time they find food, and replicate every time they get to 200 energy or above.
-- Add a visual indicator in the form of green / red arrows for speed
-- Make the visual indicator for sense transparent, maybe make it fill a transparent area rather than just one circle
-- Represent energy by colour
+- Idea: the above mode could be a clicker game where you click to produce food, rather than it just appearing randomly!
+- Make creatures not eat more than 2 food
+- Remove all instances of 'let' and 'var' and make it 'const' instead to make code function
 - Add deacerleration and reacceleration when hitting walls to make it look more realistic
 - Above could then become a factor if you ever do NEAT machcine learning
+- Another factor for NEAT could be food that is varying size, then more fearsome creatures will go for that one  instead
+- Add 2d graph with speed and sense both plotted
+- Make game speed up when there is only 1 - 3 creatures left
 
 "each time a creature replicates, there is a chance that a mutation will give a creature a slightly lower or slightly higher speed"
 
