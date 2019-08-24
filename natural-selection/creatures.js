@@ -49,6 +49,7 @@ class Creature {
         let replicantSense = this.sense
         if (Math.random() < 0.66 ) {
             replicantSpeed += 0.20*posOrNeg()
+            if (replicantSpeed < 0) replicantSpeed = 0
         } else if (true) {
             replicantSense += 10*posOrNeg()
             if (replicantSense < 0) replicantSense = 0 // stop sense from giving energy

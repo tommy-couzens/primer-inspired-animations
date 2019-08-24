@@ -29,13 +29,13 @@
 <script>
 
 let creatures1 = []
-// for (let x = 50; x < map.width; x+= 100) {
-// 	creatures1.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
-// 	creatures1.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
-// }
+for (let x = 50; x < map.width; x+= 100) {
+	creatures1.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
+	creatures1.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
+}
 
-creatures1.push(new Creature(new Vector(50, 50), new Vector(0, 1), 1 ) )
-creatures1.push(new Creature(new Vector(250, 50), new Vector(0, 1), 1 ) )
+// creatures1.push(new Creature(new Vector(50, 50), new Vector(0, 1), 1 ) )
+// creatures1.push(new Creature(new Vector(250, 50), new Vector(0, 1), 1 ) )
 
 foodArray = generateFood(50)
 
@@ -57,14 +57,16 @@ function rgb(r, g, b){
   return "rgb("+r+","+g+","+b+")";
 }
 
-function updateGraph() {
-	const speeds = epoch.creatures.map(creature => creature.speed.toFixed(2))
+function updateGraph(creatures) {
+	const speeds = creatures.map(creature => creature.speed.toFixed(2))
+	console.log(speeds.length)
 	const speedMap = countMap(speeds)
+	// console.log(speedMap)
 	speedChart.data.labels = Array.from(speedMap.keys())
 	speedChart.data.datasets[0].data = Array.from(speedMap.values())
 	speedChart.update()
 
-	const senses = epoch.creatures.map(creature => creature.sense.toFixed(2))
+	const senses = creatures.map(creature => creature.sense.toFixed(2))
 	const senseMap = countMap(senses)
 	senseChart.data.labels = Array.from(senseMap.keys())
 	senseChart.data.datasets[0].data = Array.from(senseMap.values())
@@ -78,7 +80,7 @@ function run() {
 	const aliveCreatures = epoch.creatures.filter(creature => creature.energy > 0)
 	const hungryCreatures = aliveCreatures.filter(creature => creature.foodEaten < 2)
 
-	updateGraph()
+	updateGraph(hungryCreatures)
 
 	hungryCreatures.forEach(creature => {
 		creature.replicationTimer-- // Should probably do this per second and not per frame
