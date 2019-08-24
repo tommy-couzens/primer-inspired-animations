@@ -1,44 +1,51 @@
 class Creature {
-    constructor(position, velocity, speed = 1, size = 15, sense = size*3) {
+    constructor(position, velocity, speed = 1, size = 15, sense = size*3, energy = 100) {
         this.position = position
         this.speed = speed;
         this.velocity = velocity.setToSpeed(this.speed)
+        this.eating = false
 
         this.size = size;
         this.sense = sense;
 
-        this.energy = 100;
+        this.energy = energy;
         this.foodEaten = 0;
+        this.replicationTimer = 0;
     }
 
     move() {
-        // change direction at boundaries
-        if ( this.position.x + this.size + 5 > map.width && this.velocity.x > 0) {
-            this.velocity.x *= -1
-        }
-        if ( this.position.x + this.velocity.x - this.size < 0 && this.velocity.x < 0 ) {
-            this.velocity.x *= -1
-        }
-        if ( this.position.y + this.size > map.height && this.velocity.y > 0) {
-            this.velocity.y *= -1
-        } 
-        if (this.position.y - this.size < 0 && this.velocity.y < 0) {
-            this.velocity.y *= -1
-        } 
+        if ( !this.eating) {
+            // change direction at boundaries
+            if ( this.position.x + this.size + 5 > map.width && this.velocity.x > 0) {
+                this.velocity.x *= -1
+            }
+            if ( this.position.x + this.velocity.x - this.size < 0 && this.velocity.x < 0 ) {
+                this.velocity.x *= -1
+            }
+            if ( this.position.y + this.size > map.height && this.velocity.y > 0) {
+                this.velocity.y *= -1
+            } 
+            if (this.position.y - this.size < 0 && this.velocity.y < 0) {
+                this.velocity.y *= -1
+            } 
 
-        // move
-        this.position.add(this.velocity.mul(GAMESPEED))
-        this.energy -= (Math.pow(this.speed, 3) + (this.sense - 45)/15)/3
+            // move
+            this.position.add(this.velocity.mul(GAMESPEED))
+            this.energy -= (Math.pow(this.speed, 3) + (this.sense - 45)/15)/3
+        }
     }
 
     draw() {
         circle(this.position.x, this.position.y, this.size, rgb(0, (this.energy/100)*255, 0));
     }
 
-   replicate() {
+   replicate(creaturesArray) {
      // temp method - is calling an outside array which is not good - maybe this should all be part of some creature creatures class
-      epoch.creatures.push(new Creature(this.position.plus(new Vector(this.size, -this.size)), this.velocity.mul(-1), this.speed, this.size, this.sense))
-      this.energy = 100
+      this.energy -= 50
+      const x = this.position.x + 25 // - Math.random()*100
+      const y = this.position.y + 25 // - Math.random()*100
+      creaturesArray.push(new Creature(new Vector(x, y), this.velocity.mul(-1), this.speed, this.size, this.sense, 50))
+      this.replicationTimer = 600
 }
 
     detectFood(foodArray) {
@@ -55,7 +62,9 @@ class Creature {
             }
             const closestFood = foodArray.reduce((a, b) => closerFood(a,b))
 
+            this.eating = false
             if (distanceFromFood(closestFood) < this.size) {
+                this.eating = true
                 this.eatFood(closestFood)
             } else if (distanceFromFood(closestFood) < this.sense) {
                 this.velocity = this.position.directionTowards(closestFood.position).setToSpeed(this.speed)
@@ -65,11 +74,11 @@ class Creature {
 
     eatFood(food) {
         // this.foodEaten++
-	this.energy += 5
-	food.energy -= 5
-	if (food.energy < 20) {
-	    food.eaten = true;
-	}
+        this.energy += 5
+        food.energy -= 5
+        if (food.energy < 20) {
+            food.eaten = true;
+        }
     }
     drawEnergy() {
         ctx.font = "15px Arial";

@@ -35,9 +35,9 @@ let creatures1 = []
 // }
 
 creatures1.push(new Creature(new Vector(50, 50), new Vector(0, 1), 1 ) )
-creatures1.push(new Creature(new Vector(250, 50), new Vector(0, 1), 1 ) )
+// creatures1.push(new Creature(new Vector(250, 50), new Vector(0, 1), 1 ) )
 
-foodArray = generateFood(100)
+foodArray = generateFood(20)
 
 epochArray = [new Epoch(creatures1, foodArray)]
 
@@ -80,23 +80,34 @@ function run() {
 		senseChart.data.datasets[0].data = Array.from(senseMap.values())
 		senseChart.update()
 	}
-
+	console.log(hungryCreatures.length)
 	hungryCreatures.forEach(creature => {
-		if (creature.energy > 200) {
-		   creature.replicate()
+		creature.replicationTimer-- // Should probably do this per second and not per frame
+		if (creature.energy > 200 && creature.replicationTimer <= 0) {
+		   creature.replicate(epoch.creatures)
 		}
 		creature.draw();
 		// creature.drawSense();
-		// creature.drawEnergy();
+		creature.drawEnergy();
 		creature.drawSpeed();
 		// creature.drawFoodEaten();
 		creature.detectFood(uneatenFood);
 		creature.move();
 	})
-
+    // epoch.food[0].replicate(epoch.food)
 	epoch.food.forEach(food => {
 		if ( !food.eaten ) {
+			// food.replicate(epoch.food)
 			food.draw()
+			if (food.energy > 150) {
+				food.replicationTimer--
+				if (food.replicationTimer <= 0) {
+					food.replicate(epoch.food, 50)
+					food.replicationTimer = 300
+				}
+			} else {
+				food.energy++
+			}
 		} 
 	})
 	requestAnimationFrame(run);
