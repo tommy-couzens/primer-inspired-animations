@@ -3,7 +3,7 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
 // Set canvas to left half the size of the screen
-canvas.width = window.innerWidth/2 - 50
+canvas.width = window.innerWidth*(2/3) - 50
 canvas.height = window.innerHeight -50
 
 // Bigger  canvas

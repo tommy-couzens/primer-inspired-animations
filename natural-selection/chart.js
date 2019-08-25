@@ -3,10 +3,32 @@ var speedCanvas = document.getElementById("speedChart");
 var speedtx = speedCanvas.getContext("2d");
 
 // Set canvas to left half the size of the screen
-// speedCanvas.width = window.innerWidth/2 - 50
-// speedCanvas.height = window.innerHeight/2 -50
-speedCanvas.width = canvas.width*2
-speedCanvas.height = canvas.height
+speedCanvas.width = window.innerWidth/2 
+speedCanvas.height = window.innerHeight/2 -50
+// speedCanvas.width = canvas.width*2
+// speedCanvas.height = canvas.height
+
+speedCanvas.style.border = "0px solid";
+
+// Helper function to get creature data into the correct format
+const countMap = (array) => {
+	return new Map([...new Set(array)].map(x => [x, array.filter(y => y ==x).length]).sort())
+}
+
+function updateGraph(creatures) {
+	const speeds = creatures.map(creature => creature.speed.toFixed(2))
+	const speedMap = countMap(speeds)
+	// console.log(speedMap)
+	speedChart.data.labels = Array.from(speedMap.keys())
+	speedChart.data.datasets[0].data = Array.from(speedMap.values())
+	speedChart.update()
+
+	const senses = creatures.map(creature => creature.sense.toFixed(2))
+	const senseMap = countMap(senses)
+	senseChart.data.labels = Array.from(senseMap.keys())
+	senseChart.data.datasets[0].data = Array.from(senseMap.values())
+	senseChart.update()
+}
 
 const speedData1 = {
     labels: ["1.00"],
@@ -28,10 +50,10 @@ const speedChart = new Chart(speedtx, {
     options: {
         layout: {
             padding: {
-                left: window.innerWidth/2,
-                right: 0,
-                top: 0,
-                bottom: window.innerHeight/2,
+                left: canvas.width + 50,
+                right: 50,
+                top: 50,
+                bottom: canvas.height/2,
             }
         },
         scales: {
@@ -51,6 +73,8 @@ var sensetx = senseCanvas.getContext("2d");
 // Set canvas to left half the size of the screen
 senseCanvas.width = window.innerWidth/2 - 50
 senseCanvas.height = window.innerHeight/2 -50
+
+senseCanvas.style.border = "0px solid";
 
 const senseData1 = {
     labels: ["1.00"],
@@ -72,10 +96,10 @@ const senseChart = new Chart(sensetx, {
     options: {
         layout: {
             padding: {
-                left: window.innerWidth/2,
-                right: 0,
-                top: window.innerHeight/2,
-                bottom: 0,
+                left: canvas.width + 50,
+                right: 50,
+                top: canvas.height/2,
+                bottom: 50,
             }
         },
         scales: {
