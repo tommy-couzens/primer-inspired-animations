@@ -67,8 +67,7 @@ function run() {
 	
 	// I should actually measure time instead of doing math.random
 	if (drawLineGraph && Math.random() < 0.02) {
-		console.log("hello")
-		updateLineGraph(creaturesArray)
+		updateLineGraph(creaturesArray, foodArray)
 	}
 
 	creaturesArray.forEach(creature => {

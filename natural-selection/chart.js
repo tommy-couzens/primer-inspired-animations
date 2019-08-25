@@ -125,12 +125,10 @@ var populationtx = populationGraph.getContext("2d");
 populationGraph.width = window.innerWidth/2 
 populationGraph.height = window.innerHeight/2 -50
 
-function updateLineGraph(creatures) {
-    // console.log(creatures.length)
-    console.log(populationChart.data.labels)
+function updateLineGraph(creatures, food) {
     populationChart.data.labels.push("1")
-    console.log(populationChart.data.labels)
     populationChart.data.datasets[0].data.push( creatures.length)
+    populationChart.data.datasets[1].data.push(food.length/2)
     populationChart.update()
 
 }
@@ -140,8 +138,16 @@ if (drawLineGraph) {
         labels: [],
         datasets: [{
             label: 'population',
-            backgroundColor: 'rgb(255, 255, 132)',
+            // backgroundColor: 'rgb(255, 255, 132)',
             borderColor: 'rgb(0, 0, 0)',
+            pointRadius: 0,
+            // data: [2, 3, 5, 8, 1, 2, 1, 1, 1, 1, 7, 8, 9, 10]
+            data: []
+        },
+        {
+            label: 'food /2',
+            // backgroundColor: 'rgb(0, 255, 132)',
+            borderColor: 'rgb(255, 0, 0)',
             pointRadius: 0,
             // data: [2, 3, 5, 8, 1, 2, 1, 1, 1, 1, 7, 8, 9, 10]
             data: []
