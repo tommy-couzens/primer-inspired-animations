@@ -3,8 +3,8 @@
 <head>
 	<title>natural selection</title>
 	<canvas id="canvas" style="position: absolute; top: 0; left: 0; border:1px solid #000000;"></canvas>
-	<canvas id="speedChart" style="position: absolute; top: 0; left: 0; border:1px solid #000000;"></canvas>
-	<canvas id="senseChart" style="position: absolute; top: 0; left: 0; border:1px solid #000000;"></canvas>
+	<canvas id="speedChart" style="position: absolute; top: 0; left: 0"></canvas>
+	<canvas id="senseChart" style="position: absolute; top: 0; left: 0"></canvas>
 
 	<script src="../geometry.js"></script>
 	<script src="../Vectors.js"></script>
@@ -25,14 +25,18 @@
 <!-- Draw the chart -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="chart.js"></script>
+
+<!-- NEAT algorithm I stole from https://www.reddit.com/r/MachineLearning/comments/c87iqm/p_a_javascript_library_implementing_the_neat/ -->
+<script src="NEAT.js"></script>
+<script src="my_neat.js"></script>
   
 <script>
 
-let creatures1 = []
-for (let x = 50; x < map.width; x+= 100) {
-	creatures1.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
-	creatures1.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
-}
+// let creatures1 = []
+// for (let x = 50; x < map.width; x+= 100) {
+// 	creatures1.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
+// 	creatures1.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
+// }
 
 // creatures1.push(new Creature(new Vector(50, 50), new Vector(0, 1), 1 ) )
 // creatures1.push(new Creature(new Vector(250, 50), new Vector(0, 1), 1 ) )
@@ -48,7 +52,9 @@ drawDividerLine()
 epoch = epochArray[epochArray.length - 1]
 
 // Use this as a function
-function setup() {}
+function setup() {
+	// drawGraphs()
+}
 
 const countMap = (array) => {
 	return new Map([...new Set(array)].map(x => [x, array.filter(y => y ==x).length]).sort())
@@ -80,7 +86,7 @@ function run() {
 	const aliveCreatures = epoch.creatures.filter(creature => creature.energy > 0)
 	const hungryCreatures = aliveCreatures.filter(creature => creature.foodEaten < 2)
 
-	updateGraph(hungryCreatures)
+	// updateGraph(hungryCreatures)
 
 	hungryCreatures.forEach(creature => {
 		creature.replicationTimer-- // Should probably do this per second and not per frame
@@ -124,5 +130,5 @@ function run() {
 	requestAnimationFrame(run);
 }
 
-run();
+// run();
 </script>

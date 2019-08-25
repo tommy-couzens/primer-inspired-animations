@@ -1,4 +1,6 @@
 To do:   
+- Make a PR of neat.js and correctly the spelling of neat.decision
+- Don't use NEAT - use something like RNN instead where you supply the algorithm with a score for each individual creature. You are doing the machine learning on a individual basis, not taking the top 10% of the population - that is done automatically using your simulator
 - Remove all instances of 'let' and 'var' and make it 'const' instead to make code function
 - Add deacerleration and reacceleration when hitting walls and approaching food to make it look more realistic
 - Above could then become a factor if you ever do NEAT machcine learning - they would try and avoid walls
