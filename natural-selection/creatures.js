@@ -30,7 +30,7 @@ class Creature {
 
             // move
             this.position.add(this.velocity.mul(3)) // .mul(3) just to make them a bit faster
-            this.energy -= (Math.pow(this.speed, 2) + (this.sense)/90)/3
+            this.energy -= (Math.pow(this.speed, 2) + (this.sense)/180)/3
         }
     }
 

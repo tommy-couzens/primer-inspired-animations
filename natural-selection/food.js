@@ -8,6 +8,7 @@ class Food {
         this.replicationTimer = 0
     }
     draw() {
+        if (this.energy < 0) this.energy = 0
         circle(this.position.x, this.position.y, this.size*this.energy/100, "red");
     }
 
