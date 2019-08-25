@@ -7,8 +7,8 @@ canvas.width = window.innerWidth/2 - 50
 canvas.height = window.innerHeight -50
 
 // Bigger  canvas
-canvas.width = 1500
-canvas.height = 1000
+// canvas.width = 1500
+// canvas.height = 1000
 
 // Smaller  canvas
 // canvas.width = 100

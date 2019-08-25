@@ -2,7 +2,8 @@ class Food {
     constructor(position, energy = 100) {
         this.position = position
         this.size = 5
-	    this.energy = energy
+        this.energy = energy
+        this.growthRate = 0.10
         this.eaten = false
         this.replicationTimer = 0
     }

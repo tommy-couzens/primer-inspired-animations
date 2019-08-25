@@ -3,8 +3,10 @@ var speedCanvas = document.getElementById("speedChart");
 var speedtx = speedCanvas.getContext("2d");
 
 // Set canvas to left half the size of the screen
-speedCanvas.width = window.innerWidth/2 - 50
-speedCanvas.height = window.innerHeight/2 -50
+// speedCanvas.width = window.innerWidth/2 - 50
+// speedCanvas.height = window.innerHeight/2 -50
+speedCanvas.width = canvas.width*2
+speedCanvas.height = canvas.height
 
 const speedData1 = {
     labels: ["1.00"],
