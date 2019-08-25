@@ -1,5 +1,6 @@
 To do:   
-- Remove all instances of 'let' and 'var' and make it 'const' instead to make code function
+- Remove all instances of 'let' and 'var' and make it 'const' instead to make code functional
+- Add a max amount of food per area (bucket) so food amounts doesn't get ridiculous
 - Add deacerleration and reacceleration when hitting walls and approaching food to make it look more realistic
 - Above could then become a factor if you ever do NEAT machcine learning - they would try and avoid walls
 - Another factor for NEAT could be food that is varying size, then more fearsome creatures will go for that one  instead
@@ -12,6 +13,8 @@ To do:
 - With above^: Add buckets or quadtrees for efficient collision detection
 After even more time the average speed dropped to 0.20 and the population has risen even more to 600
 Graphing this over time would be quite cool. I think it would steadily increase over time as speed decreases slowly.
+- Add an animation to replicating that happens over a couple seconds
+- Add eating animaion
 
 Other idea:
 Food doubles in two each round or some other dependancy based on how much food there was last round.
