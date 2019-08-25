@@ -44,7 +44,8 @@ for (let i = 0; i < TOTAL; i++) {
 
 function setScore(creatures) {
     for (let i = 0; i < TOTAL; i++) {
-        neat.setFitness(creatures[i].position.x, i);
+        neat.setFitness(creatures[i].position.x - MARKER, i);
+        console.log(creatures[i].position.x - MARKER)
       }
 }
 
