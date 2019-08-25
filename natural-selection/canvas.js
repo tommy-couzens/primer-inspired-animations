@@ -14,9 +14,6 @@ canvas.height = window.innerHeight -50
 // canvas.width = 100
 // canvas.height = 100
 
-// Give the canvas a border
-canvas.style.border = "10px solid";
-
 map = {}
 // map.width = canvas.width/2 - 25;
 map.width = canvas.width;

@@ -2,9 +2,10 @@
 <html>
 <head>
 	<title>natural selection</title>
-	<canvas id="canvas" style="position: absolute; top: 0; left: 0; border:1px solid #000000;"></canvas>
-	<canvas id="speedChart" style="position: absolute; top: 0; left: 0; border:1px solid #000000;"></canvas>
-	<canvas id="senseChart" style="position: absolute; top: 0; left: 0; border:1px solid #000000;"></canvas>
+	<canvas id="canvas" style="position: absolute; top: 0; left: 0; border:10px solid #000000;"></canvas>
+	<canvas id="speedChart" style="position: absolute; top: 0; left: 0;"></canvas>
+	<canvas id="senseChart" style="position: absolute; top: 0; left: 0;"></canvas>
+	<canvas id="populationLineGraph" style="position: absolute; top: 0; left: 0;"></canvas>
 
 	<script src="../geometry.js"></script>
 	<script src="../Vectors.js"></script>
@@ -64,6 +65,12 @@ function run() {
 		updateGraph(creaturesArray)
 	}
 	
+	// I should actually measure time instead of doing math.random
+	if (drawLineGraph && Math.random() < 0.02) {
+		console.log("hello")
+		updateLineGraph(creaturesArray)
+	}
+
 	creaturesArray.forEach(creature => {
 		creature.replicationTimer-- // Should probably do this per second and not per frame
 		if (creature.energy > 200 && creature.replicationTimer <= 0) {

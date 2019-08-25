@@ -8,10 +8,8 @@ speedCanvas.height = window.innerHeight/2 -50
 // speedCanvas.width = canvas.width*2
 // speedCanvas.height = canvas.height
 
-speedCanvas.style.border = "0px solid";
-
 // const drawGraph = false
-const drawGraph = true
+const drawGraph = false
 
 
 // Helper function to get creature data into the correct format
@@ -79,8 +77,6 @@ var sensetx = senseCanvas.getContext("2d");
 senseCanvas.width = window.innerWidth/2 - 50
 senseCanvas.height = window.innerHeight/2 -50
 
-senseCanvas.style.border = "0px solid";
-
 if (drawGraph) {
     var senseData1 = {
         labels: ["1.00"],
@@ -106,6 +102,66 @@ if (drawGraph) {
                     right: 50,
                     top: canvas.height/2,
                     bottom: 50,
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    }); 
+}
+
+const drawLineGraph = true
+
+// Define canvas object
+var populationGraph = document.getElementById("populationLineGraph");
+var populationtx = populationGraph.getContext("2d");
+
+// Set canvas to left half the size of the screen
+populationGraph.width = window.innerWidth/2 
+populationGraph.height = window.innerHeight/2 -50
+
+function updateLineGraph(creatures) {
+    // console.log(creatures.length)
+    console.log(populationChart.data.labels)
+    populationChart.data.labels.push("1")
+    console.log(populationChart.data.labels)
+    populationChart.data.datasets[0].data.push( creatures.length)
+    populationChart.update()
+
+}
+
+if (drawLineGraph) {
+    var populationData1 = {
+        labels: [],
+        datasets: [{
+            label: 'population',
+            backgroundColor: 'rgb(255, 255, 132)',
+            borderColor: 'rgb(0, 0, 0)',
+            pointRadius: 0,
+            // data: [2, 3, 5, 8, 1, 2, 1, 1, 1, 1, 7, 8, 9, 10]
+            data: []
+        }]
+    }
+    var populationChart = new Chart(populationtx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: populationData1,
+
+        // Configuration options go here
+        options: {
+            layout: {
+                padding: {
+                    left: canvas.width + 50,
+                    right: 50,
+                    top: 50,
+                    bottom: canvas.height/2,
                 }
             },
             scales: {
