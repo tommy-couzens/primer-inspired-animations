@@ -19,9 +19,6 @@
 <script src="creatures.js"></script>
 <script src="food.js"></script>
 
-<!-- Manage epochs. An "epoch" is a round -->
-<script src="epoch.js"></script>
-
 <!-- Draw the chart -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="chart.js"></script>
@@ -29,7 +26,7 @@
 <script>
 
 let creaturesArray = []
-for (let x = 50; x < map.width; x+= 100) {
+for (let x = 50; x < map.width; x+= 500) {
 	creaturesArray.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
 	creaturesArray.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
 }
@@ -38,8 +35,6 @@ for (let x = 50; x < map.width; x+= 100) {
 // creaturesArray.push(new Creature(new Vector(250, 50), new Vector(0, 1), 1 ) )
 
 foodArray = generateFood(50)
-
-const drawGraph = true
 
 // Use this as a function
 function setup() {}
@@ -65,9 +60,10 @@ function run() {
 	foodArray = foodArray.filter(food => !food.eaten)
 	creaturesArray = creaturesArray.filter(creature => creature.energy > 0)
 
-
-	updateGraph(creaturesArray)
-
+	if (drawGraph) {
+		updateGraph(creaturesArray)
+	}
+	
 	creaturesArray.forEach(creature => {
 		creature.replicationTimer-- // Should probably do this per second and not per frame
 		if (creature.energy > 200 && creature.replicationTimer <= 0) {
@@ -82,7 +78,7 @@ function run() {
 		creature.move();
 	})
 	// Generate a random food
-	if (Math.random() < 0.05) {
+	if (Math.random() < 0.02) {
 		const x = 10 + (map.width - 20)*Math.random()  // min + (max - min)*i
 		const y = 100 + (map.height - 200)*Math.random()
 		foodArray.push(new Food(new Vector(x, y)))
