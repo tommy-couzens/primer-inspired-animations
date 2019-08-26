@@ -55,7 +55,6 @@ const posOrNeg = function() {
   
 function run() {
 	wipeScreen();
-	// drawDividerLine()
 
 	// Remove any dead creatures or food
 	foodArray = foodArray.filter(food => !food.eaten)
@@ -68,17 +67,19 @@ function run() {
 	// I should actually measure time instead of doing math.random
 	if (drawLineGraph && Math.random() < 0.02) {
 		updateLineGraph(creaturesArray, foodArray)
+		
 	}
-
+	// canvas.width-- // this is fun to do
+	// map.width--
 	creaturesArray.forEach(creature => {
 		creature.replicationTimer-- // Should probably do this per second and not per frame
 		if (creature.energy > 200 && creature.replicationTimer <= 0) {
 		   creature.replicate(creaturesArray)
 		}
 		creature.draw();
-		creature.drawSense();
+		// creature.drawSense();
 		// creature.drawEnergy();	
-		creature.drawSpeed();
+		// creature.drawSpeed();
 		// if (creature.energy < 300) creature.detectFood(foodArray);
 		creature.detectFood(foodArray);
 		creature.move();

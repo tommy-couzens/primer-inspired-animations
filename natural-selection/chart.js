@@ -8,8 +8,9 @@ speedCanvas.height = window.innerHeight/2 -50
 // speedCanvas.width = canvas.width*2
 // speedCanvas.height = canvas.height
 
-// const drawGraph = false
-const drawGraph = false
+// one must be false
+const drawGraph = true
+const drawLineGraph = false
 
 
 // Helper function to get creature data into the correct format
@@ -115,7 +116,7 @@ if (drawGraph) {
     }); 
 }
 
-const drawLineGraph = true
+
 
 // Define canvas object
 var populationGraph = document.getElementById("populationLineGraph");
