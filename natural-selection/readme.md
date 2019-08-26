@@ -5,6 +5,7 @@ To do:
 - Above could then become a factor if you ever do NEAT machcine learning - they would try and avoid walls
 - Another factor for NEAT could be food that is varying size, then more fearsome creatures will go for that one  instead
 - Add 2d graph with speed and sense both plotted
+- Add graph of population over time
 - Make game speed up when there is only 1 - 3 creatures left
 - Add an energy bar for energy
 - Add in gamespeed: Do this by just setting the framerate on the run() function somehow, but by being silly and coding in a gamespeed variable everywhere
