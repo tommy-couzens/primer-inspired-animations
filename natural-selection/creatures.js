@@ -1,5 +1,5 @@
 class Creature {
-    constructor(position, velocity, speed = 1, size = 15, sense = size*3, energy = 100) {
+    constructor(position, velocity, speed = 1, size = 8, sense = size*3, energy = 100) {
         this.position = position
         this.speed = speed;
         this.velocity = velocity.setToSpeed(this.speed)
@@ -9,14 +9,13 @@ class Creature {
         this.sense = sense;
 
         this.energy = energy;
-        this.foodEaten = 0;
         this.replicationTimer = 0;
     }
 
     move() {
         if ( !this.eating) {
             // change direction at boundaries
-            if ( this.position.x + this.size + 5 > map.width && this.velocity.x > 0) {
+            if ( this.position.x + this.size > map.width && this.velocity.x > 0) {
                 this.velocity.x *= -1
             }
             if ( this.position.x + this.velocity.x - this.size < 0 && this.velocity.x < 0 ) {
@@ -30,8 +29,8 @@ class Creature {
             } 
 
             // move
-            this.position.add(this.velocity.mul(GAMESPEED))
-            this.energy -= (Math.pow(this.speed, 2) + (this.sense)/90)/3
+            this.position.add(this.velocity.mul(3)) // .mul(3) just to make them a bit faster
+            this.energy -= (Math.pow(this.speed, 2) + (this.sense)/180)/3
         }
     }
 
@@ -72,9 +71,11 @@ class Creature {
             }
             const closestFood = foodArray.reduce((a, b) => closerFood(a,b))
 
+            // If in rang of food, and is hungry or not already eating then eat the good
             if (distanceFromFood(closestFood) < this.size && (this.energy < 300 || this.eating)) {
                 this.eating = true
                 this.eatFood(closestFood)
+            // If the food is in detection range move towards it
             } else if (distanceFromFood(closestFood) < this.sense) {
                 this.velocity = this.position.directionTowards(closestFood.position).setToSpeed(this.speed)
                 this.eating = false
@@ -85,7 +86,6 @@ class Creature {
     }
 
     eatFood(food) {
-        // this.foodEaten++
         this.energy += 5
         food.energy -= 5
         if (food.energy < 20) {
@@ -98,38 +98,18 @@ class Creature {
         ctx.fillText( Math.floor(this.energy), this.position.x -5, this.position.y);
     }
     
-    drawFoodEaten() {
-        ctx.font = "15px Arial";
-        ctx.fillStyle = "black";
-        ctx.fillText( this.foodEaten, this.position.x - 5, this.position.y + 10);
-    }
     drawSpeed() {
         // Try and do this in a declarative way, only use const instead of let!
         let speedUpgrades = Math.round(this.speed*5) -5
-        const colour = (number) => {
-            if (number > 0) {
-                if (number > 4) {
-                    number -= 4
-                    return "yellow"
-                } else {
-                    return "lightgreen"
-                }
-            } else if (number < 0) {
-                number = Math.abs(number)
-                if (number > 4 ) {
-                    number -= 4
-                    return "darkred"
-                } else {
-                    return "red"
-                }
+        if (speedUpgrades > 0)  {
+            for (let i = 0; i < speedUpgrades; i++) {
+                upArrow(this.position.x, this.position.y - this.size/2 + i*this.size/3, this.size/2)
+            }
+        } else if (speedUpgrades < 0) {
+            for (let i = 0; i > speedUpgrades; i--) {
+                downArrow(this.position.x, this.position.y - this.size/2 - i*this.size/3, this.size/2)
             }
         }
-        for (let i = 0; i < speedUpgrades; i++) {
-            arrow(this.position.x, this.position.y - this.size/2 + i*this.size/3, this.size/2, colour(speedUpgrades))
-        }
-        // for (let i = 0; i > speedUpgrades; i--) {
-        //     arrow(this.position.x, this.position.y - this.size/2 - i*this.size/3, this.size/2, "red")
-        // }
     }
     drawSense() {
         circle(this.position.x, this.position.y, this.sense, "rgba(0, 0, 255, 0.1)");

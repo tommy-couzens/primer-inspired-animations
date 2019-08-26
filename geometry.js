@@ -12,13 +12,19 @@ function circle(x, y, radius, colour="green", fill = true) {
 	}
 }
 
-function line(x1, y1, x2, y2, colour = "black", width="10") {
+function line(x1, y1, x2, y2, colour = "black", width=10, fancy = false) {
 	ctx.beginPath();
 	ctx.moveTo(x1, y1);
 	ctx.lineTo(x2, y2);
 	ctx.strokeStyle=colour;
 	ctx.lineWidth = width;
 	ctx.stroke();
+
+	if (fancy ){
+		ctx.lineWidth = width - 1
+		ctx.strokeStyle = "yellow"
+		ctx.stroke()
+	}
 }
 
 function square(x1, y1, x2, y2, colour = "black") {
@@ -26,7 +32,12 @@ function square(x1, y1, x2, y2, colour = "black") {
 	ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
 }
 
-function arrow(x, y, length, colour = "black") {
-	line(x, y, x - length, y + length/2, colour, length/3);
-	line(x, y, x + length, y + length/2, colour, length/3);
+function upArrow(x, y, length, colour = "black") {
+	line(x, y, x - length, y + length/2, colour, length/3, true);
+	line(x, y, x + length, y + length/2, colour, length/3, true);
+}
+
+function downArrow(x, y, length, colour = "black") {
+	line(x, y + length/2, x - length, y, colour, length/3, true);
+	line(x, y + length/2, x + length, y, colour, length/3, true);
 }

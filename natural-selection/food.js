@@ -1,13 +1,15 @@
 class Food {
     constructor(position, energy = 100) {
         this.position = position
-        this.size = 5
-	    this.energy = energy
+        this.size = 2
+        this.energy = energy
+        this.growthRate = 0.10
         this.eaten = false
         this.replicationTimer = 0
     }
     draw() {
-        circle(this.position.x, this.position.y, this.energy/20, "red");
+        if (this.energy < 0) this.energy = 0
+        circle(this.position.x, this.position.y, this.size*this.energy/100, "red");
     }
 
    replicate(foodArray, energy = 50) {
