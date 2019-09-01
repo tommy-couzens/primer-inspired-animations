@@ -31,3 +31,6 @@ https://www.html5rocks.com/en/tutorials/canvas/performance/
 
 Use multiple layers of cavasses to redraw just what you need to:
 https://html5.litten.com/using-multiple-html5-canvases-as-layers/
+
+webpack starting page:
+https://webpack.js.org/guides/getting-started/
