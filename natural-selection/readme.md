@@ -5,7 +5,7 @@ To do:
 - Above could then become a factor if you ever do NEAT machcine learning - they would try and avoid walls
 - Another factor for NEAT could be food that is varying size, then more fearsome creatures will go for that one  instead
 - Add 2d graph with speed and sense both plotted
-- Add graph of population over time
+- Make graphing not vary on the x axis so you can see the trend moving easier
 - Make game speed up when there is only 1 - 3 creatures left
 - Add an energy bar for energy
 - Add in gamespeed: Do this by just setting the framerate on the run() function somehow, but by being silly and coding in a gamespeed variable everywhere
@@ -34,3 +34,11 @@ https://html5.litten.com/using-multiple-html5-canvases-as-layers/
 
 webpack starting page:
 https://webpack.js.org/guides/getting-started/
+
+https://medium.com/@schreiaj/using-web-workers-react-and-webpack-d2773e3f362d
+
+run docker:
+docker run -d -v $(PWD)/dist:/usr/share/nginx/html -p 80:80 nginx
+
+Run and automatically update with file changes, without refreshing:
+npm start
