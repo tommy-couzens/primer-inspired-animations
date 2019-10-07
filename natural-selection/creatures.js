@@ -116,3 +116,11 @@ class Creature {
     }
 }
 
+const generateCreatures = () => {
+    let creaturesArray = []
+    for (let x = 50; x < map.width; x+= 500) {
+        creaturesArray.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
+        creaturesArray.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
+    }
+    return creaturesArray
+}
