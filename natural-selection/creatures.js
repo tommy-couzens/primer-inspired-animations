@@ -33,9 +33,19 @@ class Creature {
             this.energy -= (Math.pow(this.speed, 2) + (this.sense)/180)/3
         }
     }
+    draweyes(){
+        ctx.font = "15px Arial";
+        ctx.fillStyle = "black";
+        var angle = this.velocity.angle()*(180/Math.PI)
+        ctx.fillText( angle, this.position.x -5, this.position.y);
+        circle(this.position.x + this.size/3, this.position.y + this.size/2, this.size/5, rgb(0,0,0));
+        circle(this.position.x - this.size/3, this.position.y + this.size/2, this.size/5, rgb(0,0,0));
+    }
+
 
     draw() {
         circle(this.position.x, this.position.y, this.size, rgb(0, (this.energy/100)*255, 0));
+        this.draweyes();
     }
 
    replicate(creaturesArray) {

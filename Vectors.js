@@ -61,27 +61,14 @@ Vector.prototype.directionTowards = function (vector) {
 Vector.prototype.distanceTo = function(vector) {
 	return Math.sqrt(Math.pow(this.x - vector.x, 2) + Math.pow(this.y - vector.y, 2))
 };
+
+// Returns an angle between -Pi to Pi, from the horizontal axis
 Vector.prototype.angle = function() {
-	//all y values have a negative in front to match traditional coordinates
-	if (this.x == 0) {
-		if (this.y > 0) {
-			var answer = Math.PI/2;
-		} else {
-			var answer = -Math.PI/2;
-		}
-	}
-	if (this.x > 0){
-		var answer = Math.atan(this.y / this.x);
-	}
-	if (this.x < 0){
-		var answer = Math.atan(this.y / this.x) + Math.PI ;
-	}
-	return answer;
+	return Math.atan2(this.y, this.x);
 };
+
 Vector.prototype.floor = function() {
 	return new Vector (Math.floor(this.x), Math.floor(this.y));
 }
 
 var zeroVector = new Vector (0, 0);
-
-

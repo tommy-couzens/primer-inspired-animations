@@ -17,7 +17,7 @@ const posOrNeg = function() {
     }
 }
 
-var isRunning = false;
+var isRunning = true;
 var speed = 1;
 
 function togglePause() {
@@ -40,6 +40,7 @@ function reset() {
     //     creaturesArray.push(new Creature(new Vector(x, 50), new Vector(0, 1) ) )
     //     creaturesArray.push(new Creature(new Vector(x, map.height - 50), new Vector(0, -1) ) )
     // }
+    speed = 1;
     creaturesArray = generateCreatures()
     foodArray = generateFood(50)
 }
@@ -106,4 +107,4 @@ function run() {
     }
 }
 
-// run()
+run()
