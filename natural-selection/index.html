@@ -95,12 +95,13 @@ function run() {
 	ctx.fillStyle = "black";
 	ctx.fillText( "Creatures: " + creaturesArray.length, 150, 50);
 
+	console.log(foodArray.length)
 	foodArray.forEach(food => {
 		// food.replicate(foodArray)
 		food.draw()
 		if (food.energy > 150) {
 			food.replicationTimer--
-			if (food.replicationTimer <= 0) {
+			if (food.replicationTimer <= 0 && foodArray.length < 250) {
 				food.replicate(foodArray, 50)
 				food.replicationTimer = 1200
 			}
