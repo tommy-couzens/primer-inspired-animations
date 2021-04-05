@@ -3,6 +3,9 @@
 <head>
 	<title>exponential-growth</title>
 	<canvas id="canvas" style="border:1px solid #000000;"></canvas>
+  <button type="button" id="play_button" onclick="play_button()">Play</button>
+  <button type="button" id="pause_button" onclick="pause_button()">Pause</button>
+  
 	<script src="../geometry.js"></script>
 </head>
 <body>
@@ -28,33 +31,46 @@ let last      = 0;
 // The graph only needs to be drawn once since it is static
 graph.draw();
 
+let pause = false
+
 function run() {
-  let now = new Date().getTime() - startTime;
+  if (!pause) {
+    let now = new Date().getTime() - startTime;
 
-  // Increase the epoch every 200ms
-  if ( now - last > 200) {
-	last = now;
-	State.nextEpoch();
+    // Increase the epoch every 200ms
+    if ( now - last > 200) {
+      last = now;
+     State.nextEpoch();
+    }
+
+    wipeScreen();  
+
+    for (const array of Object.values(State.creatures)) {
+      array.forEach(creature => {
+        creature.draw();
+        creature.move();
+      })
+    }
+
+    // State.creatures.blue.forEach(creature => {
+    //   creature.draw();
+    //   creature.move();
+    // });
+    State.drawEpoch();
+    drawDividerLine();
+
+    requestAnimationFrame(run);
   }
-
-  wipeScreen();  
-
-  for (const array of Object.values(State.creatures)) {
-    array.forEach(creature => {
-      creature.draw();
-      creature.move();
-    })
-  }
-
-  // State.creatures.blue.forEach(creature => {
-	//   creature.draw();
-  //   creature.move();
-  // });
-  State.drawEpoch();
-  drawDividerLine();
-
-  requestAnimationFrame(run);
 }
 
 run();
+
+function play_button() {
+  pause = false;
+  run();
+}
+
+function pause_button() {
+  pause = true;
+}
 </script>

@@ -13,6 +13,7 @@ graph.incrementX = 2
 graph.incrementY = 8
 
 graph.maxCreatures = 50
+graph.maxEpochs = 400
 
 
 graph.draw = function() {
@@ -28,18 +29,28 @@ graph.draw = function() {
     ctx.font = "15px Arial";
     ctx.fillStyle = "black";
     ctx.fillText("Creatures", map.width + 80, 80);
-    ctx.fillText("Time", graph.maxX, graph.zeroY);
+    ctx.fillText("Epoch", graph.maxX, graph.zeroY);
 
+    const number_of_increments = 10
     // number the axis
-    for (let i = 0; i <= 10; i++ ){
-        ctx.fillText(Math.round(graph.maxCreatures*i/10), graph.zeroX - 25, graph.zeroY + i*(graph.maxY - graph.zeroY)/10)
+    for (let i = 0; i <= number_of_increments; i++ ){
+        ctx.fillText(Math.round(graph.maxCreatures*i/number_of_increments), graph.zeroX - 25, graph.zeroY + i*(graph.maxY - graph.zeroY)/number_of_increments)
+    }
+
+    for (let i = 0; i <= number_of_increments; i++ ){
+        ctx.fillText(Math.round(graph.maxEpochs*i/number_of_increments), graph.zeroX + i*(graph.maxX - graph.zeroX)/10, graph.zeroY + 25)
     }
 }
 
-graph.scaleDown = function() {
-    graph.incrementX *= 0.90
-    graph.incrementY *= 0.90
-    graph.maxCreatures /= 0.90
+graph.scaleDown = function(direction) {
+    if (direction == 'X' ) {
+        graph.incrementX *= 0.80
+        graph.maxEpochs /= 0.80
+    }
+    if (direction == 'Y') {
+        graph.incrementY *= 0.80;
+        graph.maxCreatures /= 0.80;
+    }
     graph.wipe()
     graph.draw()
 }
